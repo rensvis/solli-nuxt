@@ -1,5 +1,12 @@
+<script></script>
+
 <template>
   <div>
-    <NuxtWelcome />
+    <NuxtLoadingIndicator></NuxtLoadingIndicator>
+    <TheHeader></TheHeader>
+    <PageWrapper>
+      <NuxtPage />
+    </PageWrapper>
+    <TheFooter></TheFooter>
   </div>
 </template>

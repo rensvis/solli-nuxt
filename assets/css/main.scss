@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// fonts
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+
+/* extend tailwind */
+@layer components {
+  /* custom containers */
+  .c-container {
+    @apply mx-auto px-6;
+  }
+
+  .c-container--s {
+    @apply mx-auto px-6 max-w-5xl;
+  }
+
+  .c-container--xs {
+    @apply mx-auto px-6 max-w-3xl;
+  }
+
+  /* .btn-primary {
+    @apply inline-block px-4 py-8 border-none rounded-lg text-white mb-2 cursor-pointer;
+  }
+
+  .btn-primary {
+    @apply btn-primary bg-whit;
+  } */
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.2s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}
+
+.page-leave-to {
+  transform: translateY(20px);
+}
+.page-enter-from {
+  transform: translateY(-20px);
+}
