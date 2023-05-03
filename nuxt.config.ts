@@ -12,6 +12,12 @@ export default defineNuxtConfig({
   },
   plugins: ["~/plugins/fontawesome.js"],
   app: {
+    head: {
+      htmlAttrs: {
+        lang: "nl",
+      },
+      link: [{ rel: "icon", type: "image/png", href: "/favicon.ico" }],
+    },
     // pageTransition: {
     //   name: "page",
     //   mode: "out-in",
