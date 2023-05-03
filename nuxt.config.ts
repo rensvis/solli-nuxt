@@ -10,7 +10,10 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  plugins: ["~/plugins/fontawesome.js"],
+  plugins: [
+    "~/plugins/fontawesome.js",
+    { src: "~/plugins/vercel.ts", mode: "client" },
+  ],
   app: {
     head: {
       htmlAttrs: {
