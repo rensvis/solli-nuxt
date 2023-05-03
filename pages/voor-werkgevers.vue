@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <section class="flex items-center min-h-screen py-56">
+  <section class="flex items-center min-h-[100svh] py-56">
     <div class="h-full c-container--s">
       <h2 class="mb-20 text-5xl font-bold text-center">Hoe werkt Solli?</h2>
       <div class="gap-8 md:flex">

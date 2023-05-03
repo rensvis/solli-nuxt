@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <section class="h-screen">
+  <section class="h-[100svh]">
     <div class="h-full sm:px-16 c-container">
       <div class="flex flex-col items-center justify-center w-[700px] max-w-full h-full m-auto">
         <img src="/images/solli-logo-color.png" alt="logo" class="mb-10 sm:mb-16" />
