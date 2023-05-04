@@ -23,7 +23,7 @@
         <div class="flex flex-col items-center max-w-xs mx-auto mb-20 text-center md:mb-0 basis-1/3">
           <img src="/images/pages/voor-werkgevers/inbox.png" alt="Vacature" class="w-32 mb-10">
           <h3 class="mb-4 text-2xl font-medium">Direct contact</h3>
-          <p class="">Bij interesse kan de bijbaanzoeker direct contact opnemen via de websiteDit komt meteen binnen in
+          <p class="">Bij interesse kan de bijbaanzoeker direct contact opnemen via de website. Dit komt meteen binnen in
             jouw mailbox!</p>
         </div>
       </div>
