@@ -11,7 +11,8 @@
           <img src="/images/pages/voor-werkgevers/cv.png" alt="Vacature" class="w-32 mb-10">
           <h3 class="mb-4 text-2xl font-medium">Plaats een vacature</h3>
           <p class="">Binnenkort gaan wij live. Wil jij jouw vacature gratis geplaatst hebben? Vul dan <a
-              href="https://www.instagram.com/solli.nl/" target="_blank" class="underline decoration-wavy">dit
+              href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAa__abcTuNUNDVVTFEzWDlSWkRMMlpVMzg3NUExSTUwTi4u"
+              target="_blank" class="underline decoration-wavy">dit
               formulier</a> in!
           </p>
         </div>
