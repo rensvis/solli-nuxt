@@ -62,7 +62,7 @@
 
 
 <script setup lang="ts">
-import { nl } from 'date-fns/locale'; // import custom locale
+import nl from 'date-fns/locale/nl/index.js'; // import custom locale
 import { IJob } from "~/types";
 
 enum JobStatus {
