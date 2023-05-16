@@ -41,9 +41,7 @@
 
 
         </Card>
-        <button v-if="state.totalInQuery !== state.totalOnPage" @click="loadMoreJobs"
-          class="p-4 mt-10 rounded bg-neutral-200">Meer laden</button>
-        <div ref="loadMoreRef" class="py-5 text-center">Intersect</div>
+        <div ref="loadMoreRef" class=""></div>
       </section>
     </div>
   </div>
@@ -109,13 +107,6 @@ onMounted(() => {
 
   observer.observe(loadMoreRef.value!);
 });
-
-
-const loadMoreJobs = () => {
-  state.page += 1;
-  fetchJobs();
-};
-
 
 const fetchJobs = (async () => {
   if (state.jobsLoading) return;
