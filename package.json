@@ -9,17 +9,27 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@nuxtjs/supabase": "^0.3.5",
     "autoprefixer": "^10.4.14",
     "nuxt": "^3.4.0",
     "postcss": "^8.4.21",
+    "prisma": "^4.14.0",
     "sass": "^1.61.0",
     "sass-loader": "^13.2.2",
     "tailwindcss": "^3.3.1"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^1.0.0-beta.6",
+    "@formkit/nuxt": "^0.17.0",
+    "@formkit/themes": "^0.17.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/vue-fontawesome": "^3.0.3",
-    "@vercel/analytics": "^1.0.1"
+    "@prisma/client": "^4.14.0",
+    "@supabase/supabase-js": "^2.21.0",
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@vercel/analytics": "^1.0.1",
+    "@vueuse/nuxt": "^10.1.2",
+    "vue-timeago3": "^2.3.0"
   }
 }

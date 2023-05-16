@@ -39,11 +39,11 @@ export default {
 </script>
 <template>
   <header :class="headerClasses"
-    class="fixed top-0 left-0 right-0 flex items-center p-5 header md:text-lg bg-neutral-200">
+    class="fixed top-0 left-0 right-0 z-10 flex items-center p-5 header md:text-lg bg-neutral-50">
     <NuxtLink to="/">
       <div class="logo">
-      <img src="/images/solli-s-logo.png" alt="logo" class="h-10" />
-    </div>
+        <img src="/images/solli-s-logo.png" alt="logo" class="h-10" />
+      </div>
     </NuxtLink>
     <nav class="hidden ml-auto sm:block">
       <ul class="flex">
@@ -52,7 +52,7 @@ export default {
         </li>
         <li class="">
           <a href="https://www.instagram.com/solli.nl/" target="_blank" rel="noreferrer" class="">
-            <font-awesome-icon icon="fa-brands fa-instagram" class="text-2xl" />
+            <font-awesome-icon icon="fa-brands fa-instagram" class="text-xl" />
           </a>
         </li>
         <!-- <li class="ml-7">
