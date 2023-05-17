@@ -115,7 +115,8 @@ onUnmounted(() => {
 
 const handleScroll = () => {
   const rect = (solliciteerCard.value!['$el'] as any as Element).getBoundingClientRect();
-  solliciteerCardIsSticky.value = !(rect && rect.bottom < window.innerHeight);
+  console.log(window.innerHeight, rect.bottom);
+  solliciteerCardIsSticky.value = !(rect && rect.bottom < (window.innerHeight + 1));
 };
 
 </script>
