@@ -1,8 +1,8 @@
 <template>
-  <div class="py-32 c-container">
+  <div class="pt-32 mb-10 c-container md:mb-0">
     <!-- <div v-if="!job">Loading</div> -->
     <JobDetailPageSkeleton v-if="!job"></JobDetailPageSkeleton>
-    <div v-else class="flex flex-col gap-10 lg:flex-row">
+    <div v-else class="flex flex-col gap-10 md:flex-row">
       <div class="basis-2/3">
         <div class="flex justify-between">
           <div class="">
@@ -53,8 +53,18 @@
           <p class="mb-2 text-sm whitespace-pre-wrap text-neutral-500">{{ job.company.description }}</p>
         </Card>
       </div>
+
     </div>
   </div>
+  <Card ref="solliciteerCard"
+    class="sticky bottom-0 flex items-center justify-center p-4 mx-3 transition bg-white md:hidden solliciteer-card"
+    :class="{ 'solliciteer-card--sticky !mx-0 border-none rounded-none': solliciteerCardIsSticky }">
+    <Button type="solid" label="Solliciteren" size="large" :disabled="!Boolean(job)"
+      :navigateTo="`${currentRoutePath}/solliciteren`" class="w-full"></Button>
+  </Card>
+
+
+  <div class="h-96"></div>
 </template>
 
 <script setup lang="ts">
@@ -68,10 +78,12 @@ const jobId = route.params.id as string;
 const currentRoutePath = route.path;
 const job = ref<IJob | null>(null);
 
-const show = ref(true);
+const flashSkeleton = ref(true);
+const solliciteerCard = ref(null);
+const solliciteerCardIsSticky = ref(true);
 
 setInterval(() => {
-  show.value = !show.value;
+  flashSkeleton.value = !flashSkeleton.value;
 }, 1000);
 
 onMounted(async () => {
@@ -92,4 +104,29 @@ onMounted(async () => {
   }
 });
 
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+  handleScroll(); // Initial check
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
+
+const handleScroll = () => {
+  const rect = (solliciteerCard.value!['$el'] as any as Element).getBoundingClientRect();
+  solliciteerCardIsSticky.value = !(rect && rect.bottom < window.innerHeight);
+};
+
 </script>
+
+<style lang="scss">
+.solliciteer-card {
+  transition: all 0.2s ease-in-out;
+
+  &--sticky {
+    filter: drop-shadow(0 -4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 -2px 2px rgb(0 0 0 / 0.06));
+    // filter: drop-shadow(0 -10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 -4px 3px rgb(0 0 0 / 0.1));
+  }
+}
+</style>

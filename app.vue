@@ -1,7 +1,34 @@
-<script></script>
+
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+
+let isLoading = ref(true);
+
+// onMounted(async () => {
+//   await nextTick();
+//   isLoading.value = false;
+// });
+
+nextTick(() => {
+  isLoading.value = false;
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('load', () => {
+    isLoading.value = false;
+  });
+});
+</script>
+
+<style>
+.no-transition * {
+  transition: none !important;
+}
+</style>
 
 <template>
-  <div>
+  <div :class="{ 'no-transition': isLoading }">
+    {{ isLoading }}
     <NuxtLoadingIndicator></NuxtLoadingIndicator>
     <TheHeader></TheHeader>
     <PageWrapper>

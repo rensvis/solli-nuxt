@@ -1,8 +1,8 @@
 <template>
-  <button v-if="!to" :class="[buttonClass, buttonSize]" @click="handleClick">
+  <button v-if="!to" :class="[buttonClass, buttonSize, buttonDisabled]" @click="handleClick" :disabled="disabled">
     {{ label }}
   </button>
-  <NuxtLink v-else :to="to" :class="[buttonClass, buttonSize]">
+  <NuxtLink v-else :to="to" :class="[buttonClass, buttonSize, buttonDisabled]">
     {{ label }}
   </NuxtLink>
 </template>
@@ -23,6 +23,10 @@ const props = defineProps({
   size: {
     type: String,
     default: 'medium'
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 });
 
@@ -55,6 +59,11 @@ const buttonSize = computed(() => {
     default:
       return 'text-base px-4 py-2';
   }
+});
+
+// Compute button disabled
+const buttonDisabled = computed(() => {
+  return (props.disabled) ? 'bg-neutral-400 cursor-not-allowed' : '';
 });
 
 // Handle click
