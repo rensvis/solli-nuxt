@@ -1,5 +1,5 @@
 <template>
-  <div class="py-32">
+  <div class="py-24">
     <div class="c-container md:mb-0">
       <!-- <JobDetailPageSkeleton v-if="flashSkeleton"></JobDetailPageSkeleton> -->
       <JobDetailPageSkeleton v-if="!job"></JobDetailPageSkeleton>
@@ -29,7 +29,7 @@
               <HighlightList v-if="i < 2" :items="value"></HighlightList>
               <ul v-else class="flex flex-wrap gap-2">
                 <li v-for="(benefit, i) in job.benefits" :key="i"
-                  class="px-3 py-1 text-sm rounded bg-neutral-200 text-neutral-600">{{ benefit }}
+                  class="px-3 py-1 text-sm rounded text-neutral-600 bg-neutral-200">{{ benefit }}
                 </li>
               </ul>
             </div>

@@ -4,11 +4,6 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 let isLoading = ref(true);
 
-// onMounted(async () => {
-//   await nextTick();
-//   isLoading.value = false;
-// });
-
 nextTick(() => {
   isLoading.value = false;
 });

@@ -31,7 +31,15 @@
 
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.2s;
+  @media (prefers-reduced-motion) {
+    transition: none !important;
+  }
+}
+.page-enter-active {
+  transition: all 0.2s ease-out 0.2s;
+}
+.page-leave-active {
+  transition: all 0.2s ease-in;
 }
 .page-enter-from,
 .page-leave-to {

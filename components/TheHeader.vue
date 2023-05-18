@@ -1,42 +1,3 @@
-<script>
-export default {
-  data() {
-    return {
-      isMobileMenuVisible: false,
-      scrolledDown: false,
-    };
-  },
-  computed: {
-    headerClasses() {
-      return [
-        'transition-shadow',
-        this.scrolledDown ? 'shadow-md' : 'shadow-none',
-      ];
-    },
-  },
-  mounted() {
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  beforeUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  },
-  methods: {
-    handleScroll() {
-      this.scrolledDown = window.scrollY > 0;
-    },
-    toggleMobileMenu() {
-      console.log('toggleMobileMenu');
-      this.isMobileMenuVisible = !this.isMobileMenuVisible;
-      if (this.isMobileMenuVisible) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = 'auto';
-      }
-    }
-  },
-};
-
-</script>
 <template>
   <header :class="headerClasses"
     class="fixed top-0 left-0 right-0 z-10 flex items-center p-5 header md:text-lg bg-neutral-50">
@@ -88,6 +49,46 @@ export default {
 
   </header>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      isMobileMenuVisible: false,
+      scrolledDown: false,
+    };
+  },
+  computed: {
+    headerClasses() {
+      return [
+        'transition-shadow',
+        this.scrolledDown ? 'shadow-md' : 'shadow-none',
+      ];
+    },
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
+  methods: {
+    handleScroll() {
+      this.scrolledDown = window.scrollY > 0;
+    },
+    toggleMobileMenu() {
+      console.log('toggleMobileMenu');
+      this.isMobileMenuVisible = !this.isMobileMenuVisible;
+      if (this.isMobileMenuVisible) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
+      }
+    }
+  },
+};
+
+</script>
 
 <style scoped lang="scss">
 .logo,

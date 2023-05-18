@@ -1,5 +1,5 @@
 <template>
-  <div class="py-32 c-container">
+  <div class="py-24 c-container">
     <div class="gap-10 lg:flex">
       <section class="basis-1/4">
         <Card padding="large" borderRadius="large" class="mb-4 lg:mb-0">
@@ -24,19 +24,18 @@
                 <option :value="SortDirection.SalaryAscending">Salaris - laag naar hoog</option> -->
             </select>
             <span class="ml-1 text-neutral-500 sm:order-1">
-              {{ state.jobsLoading ? "Laden..." : `${state.totalOnPage} van de ${state.totalInQuery} resultaten` }}
+              {{ state.jobsLoading || !state.init ? "Laden..." : `${state.totalOnPage} van de ${state.totalInQuery}
+              resultaten` }}
             </span>
           </div>
 
           <ul v-if="!state.init" class="">
             <JobListItemSkeleton v-for="index in 10"></JobListItemSkeleton>
           </ul>
-
           <ul v-else-if="state.jobs.length" v-auto-animate class="">
             <!-- <JobListItemSkeleton></JobListItemSkeleton> -->
             <JobListItem v-for="(job, index) in state.jobs" :key="job.id" :job="job"></JobListItem>
           </ul>
-
           <p v-else>Geen resultaten</p>
 
 
@@ -96,7 +95,7 @@ onMounted(() => {
 
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting && state.init && state.totalInQuery !== state.totalOnPage) {
+      if (entry.isIntersecting && state.totalInQuery !== state.totalOnPage && state.init) {
         // Load more jobs
         state.page += 1;
         console.log(state.page);
