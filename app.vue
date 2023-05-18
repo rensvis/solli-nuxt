@@ -23,7 +23,6 @@ onBeforeUnmount(() => {
 
 <template>
   <div :class="{ 'no-transition': isLoading }">
-    {{ isLoading }}
     <NuxtLoadingIndicator></NuxtLoadingIndicator>
     <TheHeader></TheHeader>
     <PageWrapper>
