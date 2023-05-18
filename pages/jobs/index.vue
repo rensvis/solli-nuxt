@@ -110,7 +110,6 @@ onMounted(() => {
 
 const fetchJobs = (async () => {
   if (state.jobsLoading) return;
-  console.log('fetching jobs');
   state.jobsLoading = true;
   const startIndex = ((state.page) - 1) * itemsPerPage;
   const endIndex = (state.page) * itemsPerPage - 1;
@@ -134,10 +133,6 @@ const fetchJobs = (async () => {
   state.totalOnPage = startIndex + (data?.length ?? 0);
   state.totalInQuery = count ?? 0;
   state.jobsLoading = false;
-  // console.log(error);
-  // console.log(data);
-  // console.log(count);
-  // console.log(state);
 });
 
 const getSortParams = (sortDirection: SortDirection) => {

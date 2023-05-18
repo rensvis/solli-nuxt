@@ -1,10 +1,10 @@
 <template>
-  <li class="@container">
+  <li class="@container mb-4">
 
     <!-- < small -->
     <NuxtLink :to="`/jobs/${job.id}`">
-      <Card :hasBackground="false" class="mb-4 bg-neutral-50 @lg:hidden">
-        <div class="flex items-center gap-4 mb-4">
+      <Card :hasBackground="false" class="bg-neutral-50 @lg:hidden">
+        <div class="flex items-center gap-4">
           <div
             class="flex items-center justify-center flex-shrink w-16 h-16 p-2 bg-white rounded-lg sm:w-20 sm:h-20 aspect-square">
             <img :src="job.company.logo_url" :alt="`${job.company.name} logo`"
@@ -30,7 +30,7 @@
     <!-- > small -->
     <NuxtLink :to="`/jobs/${job.id}`">
       <Card :hasBackground="false"
-        class="hidden mb-4 bg-neutral-50 @lg:block transition hover:bg-neutral-100 motion-reduce:transition-none">
+        class="hidden bg-neutral-50 @lg:block transition hover:bg-neutral-100 motion-reduce:transition-none">
         <EmploymentTypePill :hoursPerWeekMin="job.hours_per_week_min" class="float-right"></EmploymentTypePill>
         <div class="flex items-center gap-4 mb-4">
           <div
