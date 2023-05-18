@@ -5,7 +5,8 @@
         <Card padding="large" borderRadius="large" class="mb-4 lg:mb-0">
           <h2 class="mb-4 text-xl font-bold">Filters</h2>
           <FormKit type="group" #default="{ value }">
-            <FormKit type="text" label="Zoeken" name="zoeken" :delay="300" v-model="state.searchTerm" />
+            <FormKit type="text" label="Zoeken" name="zoeken" :delay="300" v-model="state.searchTerm"
+              @keydown.native.enter.13="blurInput()" />
           </FormKit>
           <div v-auto-animate>
             <button v-if="showClearFilters" @click="resetFilters" class="cursor-pointer">Reset
@@ -116,6 +117,10 @@ onMounted(() => {
 
   observer.observe(loadMoreRef.value!);
 });
+
+const blurInput = () => {
+  (document.activeElement! as any).blur();
+};
 
 const fetchJobs = (async () => {
   if (state.jobsLoading) return;
