@@ -24,8 +24,7 @@
                 <option :value="SortDirection.SalaryAscending">Salaris - laag naar hoog</option> -->
             </select>
             <span class="ml-1 text-neutral-500 sm:order-1">
-              {{ state.jobsLoading || !state.init ? "Laden..." : `${state.totalOnPage} van de ${state.totalInQuery}
-              resultaten` }}
+              {{ searchStatusMessage }}
             </span>
           </div>
 
@@ -38,6 +37,13 @@
           </ul>
           <p v-else>Geen resultaten</p>
 
+          <div v-auto-animate>
+            <div v-if="state.jobs.length > 5" class="flex flex-col justify-between gap-4 mt-4 lg:mt-10 sm:flex-row">
+              <span class="ml-1 text-neutral-500 sm:order-1">
+                {{ searchStatusMessage }}
+              </span>
+            </div>
+          </div>
 
         </Card>
         <div ref="loadMoreRef" class=""></div>
@@ -82,8 +88,12 @@ let state: State = reactive({
 
 watch([() => state.searchTerm, () => state.sortDirection], ([newSearchTerm, newSortDirection]) => {
   state.page = 1;
-  console.log('watching');
   fetchJobs();
+});
+
+const searchStatusMessage = computed(() => {
+  return state.jobsLoading || !state.init ? "Laden..." : `${state.totalOnPage} van de ${state.totalInQuery}
+              resultaten`;
 });
 
 let showClearFilters = computed(() => {
