@@ -2,18 +2,19 @@
   <div class="pt-32 mb-10 c-container md:mb-0">
     <!-- <div v-if="!job">Loading</div> -->
     <JobDetailPageSkeleton v-if="!job"></JobDetailPageSkeleton>
-    <div v-else class="flex flex-col gap-10 md:flex-row">
+    <div v-else-if="job" class="flex flex-col gap-10 md:flex-row">
       <div class="basis-2/3">
-        <div class="flex justify-between">
+        <div class="flex justify-between gap-4">
           <div class="">
-            <div class="flex flex-col mb-2 min-[425px]:items-center min-[425px]:flex-row min-[425px]:gap-5 gap-2">
-              <h1 class="text-3xl font-bold min-[425px]:mb-0">{{ job.name }}</h1>
+            <h1 class="mb-4 text-4xl font-bold" style="overflow-wrap: anywhere;">{{ job.name }}</h1>
+            <div class="flex flex-wrap items-center gap-3 mb-2">
+              <p class="leading-tight text-neutral-500">{{ job.company.name }}</p>
               <EmploymentTypePill :hoursPerWeekMin="job.hours_per_week_min" class="float-right"></EmploymentTypePill>
             </div>
-            <p class="mb-2 text-neutral-500">{{ job.company.name }}</p>
           </div>
           <div>
-            <Button type="solid" label="Solliciteren" :navigateTo="`${currentRoutePath}/solliciteren`"></Button>
+            <Button type="solid" label="Solliciteren" :navigateTo="`${currentRoutePath}/solliciteren`"
+              class="hidden md:block"></Button>
           </div>
         </div>
         <HorizontalRuler></HorizontalRuler>
@@ -56,12 +57,13 @@
 
     </div>
   </div>
-  <Card ref="solliciteerCard"
+  <Card ref="sC"
     class="sticky bottom-0 flex items-center justify-center p-4 mx-3 transition bg-white md:hidden solliciteer-card"
-    :class="{ 'solliciteer-card--sticky !mx-0 border-none rounded-none': solliciteerCardIsSticky }">
+    :class="{ 'solliciteer-card--sticky !mx-0 border-none rounded-none': !sCInViewReferenceElementInView }">
     <Button type="solid" label="Solliciteren" size="large" :disabled="!Boolean(job)"
       :navigateTo="`${currentRoutePath}/solliciteren`" class="w-full"></Button>
   </Card>
+  <div ref="sCInViewReferenceElement" class="h-px"></div>
 
 
   <div class="h-96"></div>
@@ -79,8 +81,11 @@ const currentRoutePath = route.path;
 const job = ref<IJob | null>(null);
 
 const flashSkeleton = ref(true);
-const solliciteerCard = ref(null);
-const solliciteerCardIsSticky = ref(true);
+
+// sC = solliciteerCard
+const sC = ref(null);
+const sCInViewReferenceElement = ref(null);
+const sCInViewReferenceElementInView = useElementVisibility(sCInViewReferenceElement);
 
 setInterval(() => {
   flashSkeleton.value = !flashSkeleton.value;
@@ -103,21 +108,6 @@ onMounted(async () => {
     job.value = data;
   }
 });
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
-  handleScroll(); // Initial check
-});
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
-});
-
-const handleScroll = () => {
-  const rect = (solliciteerCard.value!['$el'] as any as Element).getBoundingClientRect();
-  console.log(window.innerHeight, rect.bottom);
-  solliciteerCardIsSticky.value = !(rect && rect.bottom < (window.innerHeight - 10));
-};
 
 </script>
 

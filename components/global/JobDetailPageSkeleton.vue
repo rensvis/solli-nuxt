@@ -1,23 +1,25 @@
 <template>
-  <div class="flex flex-col gap-10 lg:flex-row">
+  <div class="flex flex-col gap-10 md:flex-row">
     <div class="basis-2/3">
-      <div class="flex justify-between">
-        <div class="">
-          <div class="flex flex-col mb-4 min-[425px]:items-center min-[425px]:flex-row min-[425px]:gap-5 gap-6">
-            <SkeletonItem name="name" classString="w-40 h-8"></SkeletonItem>
+      <div class="flex justify-between gap-4">
+        <div class="w-full">
+          <SkeletonItem name="name" classString="w-80 h-10 mb-2"></SkeletonItem>
+          <div class="flex flex-wrap items-center gap-3 mb-2">
+            <SkeletonItem name="company" classString="w-40 h-4"></SkeletonItem>
             <SkeletonItem name="parttime-fulltime" classString="w-20 h-8 rounded-full"></SkeletonItem>
           </div>
-          <SkeletonItem name="company" classString="mb-2 w-40 h-4"></SkeletonItem>
         </div>
         <div>
-          <SkeletonItem name="solliciteren" classString="w-28 h-10"></SkeletonItem>
+          <SkeletonItem name="solliciteren" classString="w-28 h-10 hidden md:block"></SkeletonItem>
         </div>
       </div>
       <HorizontalRuler></HorizontalRuler>
       <SkeletonItem name="beschrijving" classString="mb-4 w-32 h-8"></SkeletonItem>
       <SkeletonItem name="description" classString="mb-1 w-full h-4"></SkeletonItem>
       <SkeletonItem name="description" classString="mb-1 w-full h-4"></SkeletonItem>
-      <SkeletonItem name="description" classString="mb-3 w-96 h-4"></SkeletonItem>
+      <!-- <SkeletonItem name="description" classString="mb-3 w-96 h-4"></SkeletonItem> -->
+      <SkeletonItem name="description" classString="mb-1 w-full h-4"></SkeletonItem>
+      <SkeletonItem name="description" classString="mb-1 w-full h-4"></SkeletonItem>
       <SkeletonItem name="description" classString="mb-1 w-full h-4"></SkeletonItem>
       <SkeletonItem name="description" classString="mb-1 w-full h-4"></SkeletonItem>
       <SkeletonItem name="description" classString="mb-1 w-full h-4"></SkeletonItem>
@@ -56,10 +58,10 @@
           <SkeletonItem name="requirement" classString="mb-1 w-40 h-20"></SkeletonItem>
         </div>
         <HorizontalRuler></HorizontalRuler>
-        <SkeletonItem name="description" classString="mb-1 w-32 h-6"></SkeletonItem>
-        <SkeletonItem name="description" classString="mb-1 w-full h-4"></SkeletonItem>
-        <SkeletonItem name="description" classString="mb-1 w-full h-4"></SkeletonItem>
-        <SkeletonItem name="description" classString="w-44 h-4"></SkeletonItem>
+        <SkeletonItem name="company-title" classString="mb-2 w-32 h-6"></SkeletonItem>
+        <SkeletonItem name="company-description" classString="mb-1 w-full h-4"></SkeletonItem>
+        <SkeletonItem name="company-description" classString="mb-1 w-full h-4"></SkeletonItem>
+        <SkeletonItem name="company-description" classString="w-44 h-4"></SkeletonItem>
       </Card>
     </div>
   </div>
