@@ -2,8 +2,8 @@
   <li class="@container mb-4">
 
     <!-- < small -->
-    <NuxtLink :to="`/jobs/${job.id}`">
-      <Card :hasBackground="false" class="bg-neutral-50 @lg:hidden">
+    <NuxtLink :to="{ path: `/jobs/${job.id}` }">
+      <Card :hasBackground="false" class="bg-neutral-50 @lg:hidden" :class="classString">
         <div class="flex items-center gap-4">
           <div
             class="flex items-center justify-center flex-shrink w-16 h-16 p-2 bg-white rounded-lg sm:w-20 sm:h-20 aspect-square">
@@ -28,8 +28,8 @@
     </NuxtLink>
 
     <!-- > small -->
-    <NuxtLink :to="`/jobs/${job.id}`">
-      <Card :hasBackground="false"
+    <NuxtLink :to="{ path: `/jobs/${job.id}` }">
+      <Card :hasBackground="false" :class="classString"
         class="hidden bg-neutral-50 @lg:block transition hover:bg-neutral-100 motion-reduce:transition-none">
         <EmploymentTypePill :hoursPerWeekMin="job.hours_per_week_min" class="float-right"></EmploymentTypePill>
         <div class="flex items-center gap-4 mb-4">
@@ -70,6 +70,10 @@ const props = defineProps({
   job: {
     type: Object as PropType<IJob>,
     required: true
+  },
+  classString: {
+    type: String,
+    default: '',
   }
 });
 

@@ -87,7 +87,7 @@ let state: State = reactive({
   totalInQuery: 0,
 });
 
-watch([() => state.searchTerm, () => state.sortDirection], ([newSearchTerm, newSortDirection]) => {
+watch([() => state.searchTerm, () => state.sortDirection], ([_newSearchTerm, _newSortDirection]) => {
   state.page = 1;
   fetchJobs();
 });
@@ -109,7 +109,6 @@ onMounted(() => {
       if (entry.isIntersecting && state.totalInQuery !== state.totalOnPage && state.init) {
         // Load more jobs
         state.page += 1;
-        console.log(state.page);
         fetchJobs();
       }
     });

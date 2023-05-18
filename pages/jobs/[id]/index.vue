@@ -14,7 +14,7 @@
               </div>
             </div>
             <div>
-              <Button type="solid" label="Solliciteren" :navigateTo="`${currentRoutePath}/solliciteren`"
+              <Button type="solid" label="Solliciteren" :navigateTo="{ path: `${currentRoutePath}/solliciteren` }"
                 class="hidden md:block"></Button>
             </div>
           </div>
@@ -53,7 +53,7 @@
       class="sticky bottom-0 flex items-center justify-center p-4 mx-3 transition bg-white md:hidden solliciteer-card"
       :class="{ 'solliciteer-card--sticky !mx-0 border-none rounded-none': !sCInViewReferenceElementInView }">
       <Button type="solid" label="Solliciteren" size="large" :disabled="!Boolean(job)"
-        :navigateTo="`${currentRoutePath}/solliciteren`" class="w-full"></Button>
+        :navigateTo="{ path: `${currentRoutePath}/solliciteren` }" class="w-full text-center"></Button>
     </Card>
     <div ref="sCInViewReferenceElement" class="h-px mb-10 md:hidden "></div>
 
@@ -124,7 +124,7 @@ const getJob = async () => {
   if (error) {
     console.error('Error fetching job details:', error);
   } else {
-    job.value = data;
+    job.value = data as unknown as IJob;
   }
 };
 

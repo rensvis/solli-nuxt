@@ -1,8 +1,8 @@
 <template>
-  <button v-if="!to" :class="[buttonClass, buttonSize, buttonDisabled]" @click="handleClick" :disabled="disabled">
+  <button v-if="!navigateTo" :class="[buttonClass, buttonSize, buttonDisabled]" @click="handleClick" :disabled="disabled">
     {{ label }}
   </button>
-  <NuxtLink v-else :to="to" :class="[buttonClass, buttonSize, buttonDisabled]">
+  <NuxtLink v-else :to="navigateTo" :class="[buttonClass, buttonSize, buttonDisabled]">
     {{ label }}
   </NuxtLink>
 </template>
@@ -27,6 +27,10 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false
+  },
+  navigateTo: {
+    type: Object as PropType<any>,
+    default: null
   }
 });
 
@@ -34,7 +38,7 @@ const props = defineProps({
 const type = ref(props.type);
 const label = ref(props.label);
 const onClick = ref(props.onClick);
-const to = ref(props.to);
+const navigateTo = ref(props.navigateTo);
 const size = ref(props.size);
 
 // Compute button class based on type

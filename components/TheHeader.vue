@@ -77,7 +77,6 @@ export default {
       this.scrolledDown = window.scrollY > 0;
     },
     toggleMobileMenu() {
-      console.log('toggleMobileMenu');
       this.isMobileMenuVisible = !this.isMobileMenuVisible;
       if (this.isMobileMenuVisible) {
         document.body.style.overflow = 'hidden';
