@@ -16,7 +16,7 @@
           </div>
         </div>
         <p class="mb-2 text-neutral-500">{{ summaryString }}</p>
-        <p class="mb-4 text-neutral-700">{{ jobDescriptionShort }}</p>
+        <p class="mb-4">{{ jobDescriptionShort }}</p>
 
         <div class="flex items-center gap-4 mb-2">
           <EmploymentTypePill :hoursPerWeekMin="job.hours_per_week_min" class="float-right"></EmploymentTypePill>

@@ -19,13 +19,13 @@
             </div>
           </div>
           <HorizontalRuler></HorizontalRuler>
-          <h2 class="mb-2 text-2xl font-medium text-neutral-700">Beschrijving</h2>
-          <p class="mb-10 whitespace-pre-wrap text-neutral-700">{{ job.description }}</p>
+          <h2 class="mb-2 text-2xl font-medium">Beschrijving</h2>
+          <p class="mb-10 whitespace-pre-wrap">{{ job.description }}</p>
 
           <div class="grid grid-cols-2 gap-y-10 gap-x-4">
             <div v-for="(value, key, i) in highlightsMap" :key="key" class="max-[475px]:col-span-2"
               :class="[i === 2 ? 'col-span-2' : 'col-span-1']">
-              <h2 class="mb-2 text-2xl font-medium text-neutral-700">{{ key }}</h2>
+              <h2 class="mb-2 text-2xl font-medium">{{ key }}</h2>
               <HighlightList v-if="i < 2" :items="value"></HighlightList>
               <ul v-else class="flex flex-wrap gap-2">
                 <li v-for="(benefit, i) in job.benefits" :key="i"
@@ -66,7 +66,7 @@
       </ul>
 
       <ul v-else-if="relatedJobs.length" v-auto-animate class="max-w-3xl">
-        <h2 class="mb-4 text-2xl font-medium text-neutral-700">Gerelateerde vacatures</h2>
+        <h2 class="mb-4 text-2xl font-medium">Gerelateerde vacatures</h2>
         <JobListItem v-for="(job, index) in relatedJobs" :key="job.id" :job="job" class="">
         </JobListItem>
       </ul>

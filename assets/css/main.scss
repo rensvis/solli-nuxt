@@ -9,7 +9,7 @@
 @layer components {
   /* custom containers */
   .c-container {
-    @apply mx-auto px-3 sm:px-6;
+    @apply mx-auto px-3 sm:px-6 max-w-screen-xl;
   }
 
   .c-container--s {

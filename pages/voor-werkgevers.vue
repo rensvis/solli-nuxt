@@ -10,7 +10,7 @@
         <div class="flex flex-col items-center max-w-xs mx-auto mb-20 text-center md:mb-0 basis-1/3">
           <img src="/images/pages/voor-werkgevers/cv.png" alt="Vacature" class="w-32 mb-10">
           <h3 class="mb-4 text-2xl font-medium">Plaats een vacature</h3>
-          <p class="">Binnenkort gaan wij live. Wil jij jouw vacature gratis geplaatst hebben? Vul dan <a
+          <p class="">Wil jij jouw vacature gratis geplaatst hebben? Vul dan <a
               href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAa__abcTuNUNDVVTFEzWDlSWkRMMlpVMzg3NUExSTUwTi4u"
               target="_blank" class="underline decoration-wavy">dit
               formulier</a> in!
