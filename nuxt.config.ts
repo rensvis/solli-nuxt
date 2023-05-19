@@ -1,6 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@formkit/nuxt", "@vueuse/nuxt", "@nuxtjs/supabase"],
+  modules: [
+    // "@formkit/nuxt",
+    "@vueuse/nuxt",
+    "@nuxtjs/supabase",
+    "@element-plus/nuxt",
+  ],
   css: [
     "~/assets/css/main.scss",
     "@fortawesome/fontawesome-svg-core/styles.css",
@@ -12,14 +17,15 @@ export default defineNuxtConfig({
     },
   },
   plugins: [
-    "~/plugins/fontawesome.js",
+    // "~/plugins/fontawesome.js",
+    { src: "~/plugins/fontawesome.js", mode: "client" },
     { src: "~/plugins/vercel.ts", mode: "client" },
     "~/plugins/auto-animate.js",
     "~/plugins/vue-timeago.js",
   ],
-  formkit: {
-    configFile: "formkit.config.ts",
-  },
+  // formkit: {
+  //   configFile: "formkit.config.ts",
+  // },
   app: {
     head: {
       htmlAttrs: {

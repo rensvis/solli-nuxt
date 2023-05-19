@@ -4,10 +4,14 @@
       <section class="basis-1/4">
         <Card padding="large" borderRadius="large" class="mb-4 lg:mb-0">
           <h2 class="mb-4 text-xl font-bold">Filters</h2>
-          <FormKit type="group" #default="{ value }">
+          <!-- <FormKit type="group" #default="{ value }">
             <FormKit type="text" label="Zoeken" name="zoeken" :delay="300" v-model="state.searchTerm"
               @keydown.native.enter.13="blurInput()" />
-          </FormKit>
+          </FormKit> -->
+          <label class="block mb-1 text-md" for="zoeken">Zoeken</label>
+          <el-input v-model="state.searchTerm" name="zoeken" id="zoeken" size="large" class="mb-2" />
+
+
           <div v-auto-animate>
             <button v-if="showClearFilters" @click="resetFilters" class="cursor-pointer">Reset
               filters</button>

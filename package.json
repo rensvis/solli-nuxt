@@ -9,8 +9,10 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@element-plus/nuxt": "^1.0.5",
     "@nuxtjs/supabase": "^0.3.5",
     "autoprefixer": "^10.4.14",
+    "element-plus": "^2.3.5",
     "nuxt": "^3.4.0",
     "postcss": "^8.4.21",
     "prisma": "^4.14.0",

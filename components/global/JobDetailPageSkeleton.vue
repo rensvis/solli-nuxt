@@ -10,7 +10,7 @@
           </div>
         </div>
         <div>
-          <SkeletonItem name="solliciteren" classString="w-28 h-10 hidden md:block"></SkeletonItem>
+          <SkeletonItem name="solliciteren" classString="w-36 h-12 hidden md:block"></SkeletonItem>
         </div>
       </div>
       <HorizontalRuler></HorizontalRuler>

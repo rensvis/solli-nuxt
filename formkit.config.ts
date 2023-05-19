@@ -1,8 +1,11 @@
 import { generateClasses } from "@formkit/themes";
 // import { arrowDown, arrowUp, check, circle, close, down, fileDoc, spinner, star, trash, date, left, right, } from "@formkit/icons"
 import theme from "./formkit/theme";
+import { nl } from "@formkit/i18n";
 
 const config = {
+  locales: { nl },
+  locale: "nl",
   config: {
     // pass our theme object to generateClasses
     classes: generateClasses(theme),

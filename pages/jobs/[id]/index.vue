@@ -14,8 +14,14 @@
               </div>
             </div>
             <div>
-              <Button type="solid" label="Solliciteren" :navigateTo="{ path: `${currentRoutePath}/solliciteren` }"
-                class="hidden md:block"></Button>
+              <NuxtLink :to="`${currentRoutePath}/solliciteren`">
+                <el-button type="primary" tag="div" size="large"
+                  class="!text-lg !p-6 !hidden md:!flex">Solliciteren</el-button>
+              </NuxtLink>
+              <!-- <Button type="solid" label="Solliciteren" :navigateTo="{ path: `${currentRoutePath}/solliciteren` }"
+                class="hidden md:block"></Button> -->
+
+
             </div>
           </div>
           <HorizontalRuler></HorizontalRuler>
@@ -52,8 +58,11 @@
     <Card ref="sC"
       class="sticky bottom-0 flex items-center justify-center p-4 mx-3 transition bg-white md:hidden solliciteer-card"
       :class="{ 'solliciteer-card--sticky !mx-0 border-none rounded-none': !sCInViewReferenceElementInView }">
-      <Button type="solid" label="Solliciteren" size="large" :disabled="!Boolean(job)"
-        :navigateTo="{ path: `${currentRoutePath}/solliciteren` }" class="w-full text-center"></Button>
+      <!-- <Button type="solid" label="Solliciteren" size="large" :disabled="!Boolean(job)"
+        :navigateTo="{ path: `${currentRoutePath}/solliciteren` }" class="w-full text-center"></Button> -->
+      <NuxtLink :to="`${currentRoutePath}/solliciteren`" class="w-full">
+        <el-button type="primary" tag="div" size="large" class="!text-xl !p-7 !w-full">Solliciteren</el-button>
+      </NuxtLink>
     </Card>
     <div ref="sCInViewReferenceElement" class="h-px mb-10 md:hidden "></div>
 
@@ -138,7 +147,7 @@ const fetchRelatedJobs = (async () => {
     )
     `)
     .neq('id', jobId)
-    .limit(4)
+    .limit(3)
     .order('created_at', { ascending: false });
   relatedJobs.value = (data ?? []);
 });

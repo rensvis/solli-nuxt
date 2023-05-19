@@ -12,9 +12,11 @@
           <NuxtLink to="/voor-werkgevers">Voor werkgevers</NuxtLink>
         </li>
         <li class="">
-          <a href="https://www.instagram.com/solli.nl/" target="_blank" rel="noreferrer" class="">
-            <font-awesome-icon icon="fa-brands fa-instagram" class="text-xl" />
-          </a>
+          <client-only>
+            <a href="https://www.instagram.com/solli.nl/" target="_blank" rel="noreferrer" class="">
+              <font-awesome-icon icon="fa-brands fa-instagram" class="text-xl" />
+            </a>
+          </client-only>
         </li>
         <!-- <li class="ml-7">
                                 <NuxtLink to="/about">About</NuxtLink>
@@ -37,9 +39,11 @@
           <NuxtLink to="/voor-werkgevers" v-on:click="toggleMobileMenu">Voor werkgevers</NuxtLink>
         </li>
         <li class="">
-          <a href="https://www.instagram.com/solli.nl/" target="_blank" rel="noreferrer" class="">
-            <font-awesome-icon icon="fa-brands fa-instagram" class="text-2xl" />
-          </a>
+          <client-only>
+            <a href="https://www.instagram.com/solli.nl/" target="_blank" rel="noreferrer" class="">
+              <font-awesome-icon icon="fa-brands fa-instagram" class="text-2xl" />
+            </a>
+          </client-only>
         </li>
         <!-- <li class="ml-7">
                                 <NuxtLink to="/about" v-on:click="toggleMobileMenu">About</NuxtLink>
