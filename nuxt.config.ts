@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
-    // "@formkit/nuxt",
+    "@formkit/nuxt",
     "@vueuse/nuxt",
     "@nuxtjs/supabase",
     "@element-plus/nuxt",
@@ -23,9 +23,9 @@ export default defineNuxtConfig({
     "~/plugins/auto-animate.js",
     "~/plugins/vue-timeago.js",
   ],
-  // formkit: {
-  //   configFile: "formkit.config.ts",
-  // },
+  formkit: {
+    configFile: "formkit.config.ts",
+  },
   app: {
     head: {
       htmlAttrs: {
