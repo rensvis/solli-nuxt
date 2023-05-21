@@ -9,10 +9,6 @@
 import { EmploymentType } from "~/types/job/EmploymentType";
 
 const props = defineProps({
-  // employmentType: {
-  //   type: String as PropType<EmploymentType>,
-  //   required: true
-  // }
   hoursPerWeekMin: {
     type: Number,
     required: true
