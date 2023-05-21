@@ -3,7 +3,7 @@
     <div class="c-container md:mb-0" v-auto-animate>
       <h1 class="mb-10 text-4xl font-bold" style="overflow-wrap: anywhere;">Solliciteren</h1>
 
-      <div v-if="applicationSuccess" class="max-w-xl">
+      <div v-if="!applicationSuccess" class="max-w-xl">
         <Card class="!bg-neutral-100 mb-8">
           <div class="flex items-center gap-3 mb-2">
             <ClientOnly>
@@ -11,8 +11,11 @@
             </ClientOnly>
             <h2 class="text-xl font-bold">Sollicitatie verstuurd!</h2>
           </div>
-          <p>Je kunt de status bekijken op de Mijn sollicitaties pagina. Houd je inbox in de gaten want binnenkort kun je
-            een reactie van de werkgever verwachten! 😍</p>
+          <p>Houd je inbox en telefoon in de gaten want binnenkort kun je een reactie van <b>{{ (job) ? job?.company.name
+            :
+            'de werkgever' }}</b>
+            verwachten! 🤩
+          </p>
         </Card>
         <img v-if="gifUrl" :src="gifUrl" class="mb-8" alt="Success Gif" />
         <Button label="Terug naar home" :navigateTo="{ path: '/' }" type="outlined"></Button>
@@ -44,7 +47,7 @@
                 :classes="{ outer: 'col-span-2 sm:col-span-1', inner: '!max-w-full' }" v-auto-animate />
               <FormKit type="textarea" label="Motivatie" name="motivation" validation="required" rows="71"
                 :classes="{ outer: 'col-span-2', inner: '!max-w-full' }" v-auto-animate />
-              <FormKit type="file" label="CV" accept=".pdf,.doc,.docx" name="resume"
+              <FormKit type="file" label="CV (optioneel)" accept=".pdf,.doc,.docx" name="resume"
                 help="Sleep bestand of klik om te uploaden" multiple="false"
                 :classes="{ outer: 'col-span-2', inner: '!max-w-full' }" />
             </div>
@@ -177,7 +180,14 @@ onMounted(() => {
 
 const getGif = async () => {
   const gifs = [
-    'https://media.giphy.com/media/Q81NcsY6YxK7jxnr4v/giphy.gif'
+    'https://media.giphy.com/media/Q81NcsY6YxK7jxnr4v/giphy.gif',
+    'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjQ4ODVjMTlmNDYxYjgyMTNkYTUxMjUyZjRhNjhkMjRmMjZiMjc4YSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/yoJC2GnSClbPOkV0eA/giphy.gif',
+    'https://media1.giphy.com/media/mGK1g88HZRa2FlKGbz/giphy.gif?cid=2154d3d7ft1hcw1fi7igkwjij9w57cyenomnfo1vd01wqy11&ep=v1_gifs_search&rid=giphy.gif&ct=g',
+    'https://media4.giphy.com/media/Jir7AUookJHIVb5aYM/giphy.gif?cid=2154d3d7ft1hcw1fi7igkwjij9w57cyenomnfo1vd01wqy11&ep=v1_gifs_search&rid=giphy.gif&ct=g',
+    'https://media3.giphy.com/media/GK7grZYLG7cs0/giphy.gif?cid=2154d3d7t3yzo87nsisopvj7y1acpjl22w14w5iklxy6xa8n&ep=v1_gifs_related&rid=giphy.gif&ct=g',
+    'https://media3.giphy.com/media/LPGLF54a2Wd0Y/giphy.gif?cid=2154d3d749n7ve7i3mtxfiad8k9e9v9wuxxanjftrrl643jz&ep=v1_gifs_related&rid=giphy.gif&ct=g',
+    'https://media4.giphy.com/media/3oz8xAFtqoOUUrsh7W/giphy.gif?cid=2154d3d7t3yzo87nsisopvj7y1acpjl22w14w5iklxy6xa8n&ep=v1_gifs_related&rid=giphy.gif&ct=g',
+
   ];
   const item = gifs[Math.floor(Math.random() * gifs.length)];
   gifUrl.value = item;

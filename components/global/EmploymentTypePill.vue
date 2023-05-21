@@ -1,6 +1,6 @@
 <template>
   <div class="px-3 py-1 text-sm rounded-full w-fit"
-    :class="[employmentType === EmploymentType.FullTime ? 'text-indigo-600 bg-indigo-200' : 'text-amber-600 bg-amber-200']">
+    :class="[employmentType === EmploymentType.FullTime ? 'text-indigo-600 bg-indigo-200' : 'text-sky-600 bg-sky-200']">
     {{ employmentType }}
   </div>
 </template>
