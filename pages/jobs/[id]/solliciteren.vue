@@ -1,8 +1,24 @@
 <template>
   <div class="py-24">
-    <div class="c-container md:mb-0">
+    <div class="c-container md:mb-0" v-auto-animate>
       <h1 class="mb-10 text-4xl font-bold" style="overflow-wrap: anywhere;">Solliciteren</h1>
-      <div class="flex flex-col gap-10 lg:flex-row">
+
+      <div v-if="applicationSuccess" class="max-w-xl">
+        <Card class="!bg-neutral-100 mb-8">
+          <div class="flex items-center gap-3 mb-2">
+            <ClientOnly>
+              <font-awesome-icon icon="far fa-circle-check" class="mt-px text-lg text-green-400" size="2xl" />
+            </ClientOnly>
+            <h2 class="text-xl font-bold">Sollicitatie verstuurd!</h2>
+          </div>
+          <p>Je kunt de status bekijken op de Mijn sollicitaties pagina. Houd je inbox in de gaten want binnenkort kun je
+            een reactie van de werkgever verwachten! 😍</p>
+        </Card>
+        <img v-if="gifUrl" :src="gifUrl" class="mb-8" alt="Success Gif" />
+        <Button label="Terug naar home" :navigateTo="{ path: '/' }" type="outlined"></Button>
+
+      </div>
+      <div v-else class="flex flex-col gap-10 lg:flex-row">
         <div class="basis-2/3">
           <h4 class="mb-1 text-md">Vacature</h4>
           <ul class="mb-4">
@@ -10,30 +26,29 @@
             <JobListItem v-else :job="job" :hasBackground="true" classString="!bg-white" />
           </ul>
 
-          <FormKit type="group" #default="{ value }" v-model="formValue">
+          <FormKit type="form" id="applicationForm" #default="{ value, disabled }" v-model="formValue" :actions="false"
+            @submit="submitForm" v-auto-animate>
             <div class="grid grid-cols-2 gap-x-4">
-              <FormKit type="text" label="Voornaam" name="voornaam" validation="required"
+              <FormKit type="text" label="Voornaam" name="firstname" validation="required"
                 :classes="{ outer: 'col-span-2 sm:col-span-1', inner: '!max-w-full' }" v-auto-animate />
-              <FormKit type="text" label="Achternaam" name="achternaam" validation="required"
+              <FormKit type="text" label="Achternaam" name="lastname" validation="required"
                 :classes="{ outer: 'col-span-2 sm:col-span-1', inner: '!max-w-full' }" v-auto-animate />
-              <FormKit type="email" label="E-mailadres" name="emailadres" validation="required"
+              <FormKit type="email" label="E-mailadres" name="email" validation="required|email"
                 :classes="{ outer: 'col-span-2 sm:col-span-1', inner: '!max-w-full' }" v-auto-animate />
-              <FormKit type="tel" label="Telefoonnummer" name="telefoonnummer" validation="required"
+              <FormKit type="tel" label="Telefoonnummer" name="phone" validation="required"
                 :classes="{ outer: 'col-span-2 sm:col-span-1', inner: '!max-w-full' }" v-auto-animate />
-              <FormKit type="date" name="date" label="Startdatum" placeholder="Datum"
+              <FormKit type="date" name="startDate" label="Startdatum" placeholder="Datum"
                 :min="new Date().toISOString().split('T')[0]" validation="required" overlay
                 :classes="{ outer: 'col-span-2 sm:col-span-1', inner: '!max-w-full' }" v-auto-animate />
-              <FormKit type="number" label="Leeftijd" name="leeftijd" validation="required|between:12,100" min="12"
-                max="100" :classes="{ outer: 'col-span-2 sm:col-span-1', inner: '!max-w-full' }" v-auto-animate />
-              <FormKit type="textarea" label="Motivatie" name="motivatie" validation="required" rows="71"
+              <FormKit type="number" label="Leeftijd" name="age" validation="required|between:12,100" min="12" max="100"
+                :classes="{ outer: 'col-span-2 sm:col-span-1', inner: '!max-w-full' }" v-auto-animate />
+              <FormKit type="textarea" label="Motivatie" name="motivation" validation="required" rows="71"
                 :classes="{ outer: 'col-span-2', inner: '!max-w-full' }" v-auto-animate />
-              <FormKit type="file" label="CV" accept=".pdf,.doc,.docx" help="Sleep bestand of klik om te uploaden"
-                multiple="false" />
+              <FormKit type="file" label="CV" accept=".pdf,.doc,.docx" name="resume"
+                help="Sleep bestand of klik om te uploaden" multiple="false"
+                :classes="{ outer: 'col-span-2', inner: '!max-w-full' }" />
             </div>
-            <pre wrap>formValue: {{ formValue }}</pre>
-            <div>
-              <Button label="Versturen"></Button>
-            </div>
+            <Button label="Versturen" type="primary" :disabled="disabled"></Button>
           </FormKit>
 
         </div>
@@ -61,14 +76,15 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script setup lang="ts">
 // import type { UploadProps, UploadUserFile, UploadInstance, UploadRawFile } from 'element-plus';
 import { IConfirmDialogParams } from "~/types/ConfirmDialogParams";
+import { Database } from "~/types/Database";
 import { IJob } from "~/types/job/Job";
+import { reset } from '@formkit/core';
 
 const confirmDialog = inject('confirmDialog');
 const {
@@ -76,16 +92,72 @@ const {
 } = confirmDialog as any;
 
 const route = useRoute();
-const client = useSupabaseClient();
+const supabaseClient = useSupabaseClient<Database>();
 
 const jobId = route.params.id as string;
 const job = ref<IJob | null>(null);
-const formValue = ref<any>(null);
+const formValue = ref<any>();
+const applicationSuccess = ref<boolean>(false);
+const gifUrl = ref('');
+
+async function handleSubmit() {
+  // Our api request:
+  await new Promise((r) => setTimeout(r, 1000));
+  reset('applicationForm');
+}
+
+async function submitForm(form: any) {
+  const resume = formValue.value.resume[0];
+  let resumeUrl: string | undefined, resumePath: string | undefined;
+
+  if (resume) {
+    resumePath = `${jobId}/${Date.now()}_${form.firstname + form.lastname}_${resume.name.replace(/\s/g, '_')}`;
+    const { data: resumeData, error: resumeError } = await supabaseClient
+      .storage
+      .from('resumes')
+      .upload(resumePath, resume.file, {
+        cacheControl: '3600',
+        upsert: false
+      });
+    if (resumeError) {
+      return console.error('Error uploading resume:', resumeError);
+    }
+    const { data: resumeUrlData } = supabaseClient
+      .storage
+      .from('resumes')
+      .getPublicUrl(resumePath);
+    resumeUrl = resumeUrlData.publicUrl;
+  }
+
+  const { data: applicationData, error: applicationError } = await supabaseClient
+    .from('applications')
+    .insert([
+      {
+        job_id: jobId,
+        first_name: form.firstname,
+        last_name: form.lastname,
+        email: form.email,
+        phone_number: form.phone,
+        start_date: form.startDate,
+        age: form.age,
+        motivation: form.motivation,
+        resume_path: resumePath,
+        resume_url: resumeUrl,
+      }
+    ]);
+
+  if (applicationError) {
+    return console.error('Error inserting application:', applicationError);
+  } else {
+    applicationSuccess.value = true;
+    reset('applicationForm');
+  }
+};
 
 onBeforeRouteLeave((_to, _from, next) => {
-  const formHasValues = Object.values(formValue.value).some((value) => value !== undefined && value !== '');
+  if (!formValue.value) return next();
+  const formHasValues = Object.values(formValue.value).some((value) => value !== undefined && value !== '' && (Array.isArray(value) ? value.length > 0 : true));
   if (!formHasValues) return next();
-  // openDialog('Weet je het zeker?', 'Je wijzigingen worden niet opgeslagen.', () => next(), () => next(false));
   const params: IConfirmDialogParams = {
     newMessage: 'Je wijzigingen worden niet opgeslagen.',
     newConfirmText: 'Yup, gooi maar weg',
@@ -99,10 +171,29 @@ onBeforeRouteLeave((_to, _from, next) => {
 
 onMounted(() => {
   getJob();
+  getGif();
+
 });
 
+const getGif = async () => {
+  const gifs = [
+    'https://media.giphy.com/media/Q81NcsY6YxK7jxnr4v/giphy.gif'
+  ];
+  const item = gifs[Math.floor(Math.random() * gifs.length)];
+  gifUrl.value = item;
+
+  // const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=Tix6zmFoFJ1QiGDqXmk1x56WGBcuLpPM&q=success&limit=20`);
+  // const data = await response.json();
+  // console.log(data);
+  // if (data.data) {
+  //   const item = data.data[Math.floor(Math.random() * data.data.length)];
+  //   gifUrl.value = item.images.downsized_medium.url;
+  // }
+};
+
+
 const getJob = async () => {
-  const { data, error } = await client
+  const { data, error } = await supabaseClient
     .from('jobs')
     .select(`*,
     company:companies (

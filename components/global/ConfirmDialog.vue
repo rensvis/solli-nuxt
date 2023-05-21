@@ -1,11 +1,10 @@
 <template>
-  {{ isOpen }}
   <el-dialog :key="isOpen.valueOf()" v-model="isOpen" :title="title" :before-close="cancelAndClose">
-    <span>{{ message }}</span>
+    <p class="text-base">{{ message }}</p>
     <template #footer>
       <span class="dialog-footer">
-        <el-button tag="div" @click="cancelAndClose">{{ cancelText }}</el-button>
-        <el-button tag="div" type="danger" @click="confirmAndClose">{{ confirmText }}</el-button>
+        <Button :label="cancelText" type="outlined" :onClick="cancelAndClose" class="mr-2"></Button>
+        <Button :label="confirmText" type="danger" :onClick="confirmAndClose"></Button>
       </span>
     </template>
   </el-dialog>

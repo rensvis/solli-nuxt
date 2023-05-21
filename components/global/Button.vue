@@ -45,11 +45,13 @@ const size = ref(props.size);
 const buttonClass = computed(() => {
   switch (type.value) {
     case 'outlined':
-      return 'border border-blue-500 text-blue-500 rounded';
+      return 'rounded border border-blue-500 text-blue-500';
     case 'textbutton':
-      return 'text-blue-500';
+      return 'rounded text-blue-500';
+    case 'danger':
+      return 'rounded bg-red-400 text-white';
     default:
-      return 'bg-blue-500 text-white rounded';
+      return 'rounded bg-blue-500 text-white';
   }
 });
 
