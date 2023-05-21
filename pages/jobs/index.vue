@@ -145,7 +145,6 @@ const fetchJobs = (async () => {
     .range(startIndex, endIndex)
     .order(sortingColumn, { ascending: isAscending });
   if (!state.init) state.init = true;
-  console.log(data);
   const jobs = data ?? [];
   state.jobs = state.page === 1 ? jobs : [...state.jobs, ...jobs];
   state.totalOnPage = startIndex + (data?.length ?? 0);

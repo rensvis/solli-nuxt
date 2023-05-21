@@ -18,7 +18,7 @@
                 <el-button type="primary" tag="div" size="large"
                   class="!text-lg !p-6 !hidden md:!flex">Solliciteren</el-button>
               </NuxtLink>
-              <!-- <Button type="solid" label="Solliciteren" :navigateTo="{ path: `${currentRoutePath}/solliciteren` }"
+              <!-- <Button type="solid" label="Solliciteren" :to="{ path: `${currentRoutePath}/solliciteren` }"
                 class="hidden md:block"></Button> -->
 
 
@@ -59,7 +59,7 @@
       class="sticky bottom-0 flex items-center justify-center p-4 mx-3 transition bg-white md:hidden solliciteer-card"
       :class="{ 'solliciteer-card--sticky !mx-0 border-none rounded-none': !sCInViewReferenceElementInView }">
       <!-- <Button type="solid" label="Solliciteren" size="large" :disabled="!Boolean(job)"
-        :navigateTo="{ path: `${currentRoutePath}/solliciteren` }" class="w-full text-center"></Button> -->
+        :to="{ path: `${currentRoutePath}/solliciteren` }" class="w-full text-center"></Button> -->
       <NuxtLink :to="`${currentRoutePath}/solliciteren`" class="w-full">
         <el-button type="primary" tag="div" size="large" class="!text-xl !p-7 !w-full">Solliciteren</el-button>
       </NuxtLink>
