@@ -3,7 +3,7 @@
     <div class="c-container md:mb-0" v-auto-animate>
       <h1 class="mb-10 text-4xl font-bold" style="overflow-wrap: anywhere;">Solliciteren</h1>
 
-      <div v-if="!applicationSuccess" class="max-w-xl">
+      <div v-if="applicationSuccess" class="max-w-xl">
         <Card class="!bg-neutral-100 mb-8">
           <div class="flex items-center gap-3 mb-2">
             <ClientOnly>

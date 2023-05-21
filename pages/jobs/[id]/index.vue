@@ -103,10 +103,13 @@ const sCInViewReferenceElement = ref(null);
 const sCInViewReferenceElementInView = useElementVisibility(sCInViewReferenceElement);
 
 const highlightsMap = computed(() => {
+  const requirements = job.value?.requirements?.filter(item => item !== '') ?? [];
+  const preferences = job.value?.preferences?.filter(item => item !== '') ?? [];
+  const benefits = job.value?.benefits?.filter(item => item !== '') ?? [];
   return {
-    ...(job.value?.requirements && { Vereisten: job.value?.requirements }),
-    ...(job.value?.preferences && { Voorkeur: job.value?.preferences }),
-    ...(job.value?.benefits && { Voordelen: job.value?.benefits }),
+    ...(requirements.length > 0 && { Vereisten: requirements }),
+    ...(preferences.length > 0 && { Voorkeur: preferences }),
+    ...(benefits.length > 0 && { Voordelen: benefits })
   };
 });
 
