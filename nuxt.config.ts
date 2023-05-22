@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     "@nuxtjs/supabase",
     "@element-plus/nuxt",
     "@nuxt/content",
+    "nuxt-gtag",
   ],
   css: [
     "~/assets/css/main.scss",
@@ -24,9 +25,6 @@ export default defineNuxtConfig({
     "~/plugins/auto-animate.js",
     "~/plugins/vue-timeago.js",
   ],
-  formkit: {
-    configFile: "formkit.config.ts",
-  },
   app: {
     head: {
       htmlAttrs: {
@@ -39,5 +37,11 @@ export default defineNuxtConfig({
       mode: "default",
       // mode: "out-in",
     },
+  },
+  formkit: {
+    configFile: "formkit.config.ts",
+  },
+  gtag: {
+    id: "G-Q6J68JPB1E",
   },
 });
