@@ -26,7 +26,7 @@
           </div>
           <HorizontalRuler></HorizontalRuler>
           <h2 class="mb-2 text-2xl font-medium">Beschrijving</h2>
-          <div class="mb-10 job-description" v-html="renderedDescription"></div>
+          <div class="mb-10 styled-text" v-html="renderedDescription"></div>
 
           <div class="grid grid-cols-2 gap-y-10 gap-x-8 @container">
             <div v-for="(value, key, i) in highlightsMap" :key="key" class="@[540px]:col-span-1 col-span-2"
@@ -169,19 +169,6 @@ const fetchRelatedJobs = (async () => {
   &--sticky {
     filter: drop-shadow(0 -4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 -2px 2px rgb(0 0 0 / 0.06));
     // filter: drop-shadow(0 -10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 -4px 3px rgb(0 0 0 / 0.1));
-  }
-}
-
-.job-description {
-
-  p,
-  ul {
-    margin-bottom: 1rem;
-  }
-
-  ul {
-    list-style-type: disc;
-    padding-left: 1.5rem;
   }
 }
 </style>

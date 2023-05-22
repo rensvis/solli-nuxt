@@ -3,8 +3,8 @@
     <p class="text-base">{{ message }}</p>
     <template #footer>
       <span class="dialog-footer">
-        <Button :label="cancelText" type="outlined" :onClick="cancelAndClose" class="mr-2"></Button>
-        <Button :label="confirmText" type="danger" :onClick="confirmAndClose"></Button>
+        <Button type="outlined" :onClick="cancelAndClose" class="mr-2">{{ cancelText }}</Button>
+        <Button type="danger" :onClick="confirmAndClose">{{ confirmText }}</Button>
       </span>
     </template>
   </el-dialog>

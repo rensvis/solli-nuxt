@@ -1,9 +1,10 @@
 <template>
   <button v-if="!to" :class="[buttonClass, buttonSize, buttonDisabled]" @click="handleClick" :disabled="disabled">
-    {{ label }}
+    <slot></slot>
   </button>
-  <NuxtLink v-else :to="to" :class="[buttonClass, buttonSize, buttonDisabled]" class="inline-block">
-    {{ label }}
+  <NuxtLink v-else :to="to" :class="[buttonClass, buttonSize, buttonDisabled]" :target="isExternalLink ? '_blank' : ''"
+    class="inline-block">
+    <slot></slot>
   </NuxtLink>
 </template>
 
@@ -17,7 +18,6 @@ const props = defineProps({
     type: String,
     default: 'solid'
   },
-  label: String,
   onClick: Function,
   size: {
     type: String,
@@ -34,10 +34,14 @@ const props = defineProps({
 
 // Use props
 const type = ref(props.type);
-const label = ref(props.label);
 const onClick = ref(props.onClick);
 const to = ref(props.to);
 const size = ref(props.size);
+
+// Compute whether link is external
+const isExternalLink = computed(() => {
+  return (to.value && to.value['startsWith'] && to.value?.startsWith('https'));
+});
 
 // Compute button class based on type
 const buttonClass = computed(() => {

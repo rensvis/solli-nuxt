@@ -10,13 +10,15 @@ export interface IApplicationFormValue {
 }
 
 export interface IApplication {
-  firstname: string;
-  lastname: string;
+  job_id: string;
+  first_name: string;
+  last_name: string;
   email: string;
-  phone: string;
+  phone_number: string;
   start_date: string;
   age: number;
   motivation: string;
   resume_url: string;
   resume_path: string;
+  created_at: string;
 }

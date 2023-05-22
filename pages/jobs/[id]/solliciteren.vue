@@ -18,12 +18,12 @@
           </p>
         </Card>
         <img v-if="gifUrl" :src="gifUrl" class="mb-8" alt="Success Gif" />
-        <Button label="Terug naar home" to="/" type="outlined"></Button>
+        <Button to="/" type="outlined">Terug naar home</Button>
 
       </div>
       <div v-else class="flex flex-col gap-10 lg:flex-row">
         <div class="basis-2/3">
-          <h4 class="mb-1 text-md">Vacature</h4>
+          <div class="mb-1 text-md">Vacature</div>
           <ul class="mb-4">
             <JobListItemSkeleton v-if="!job" />
             <JobListItem v-else :job="job" :hasBackground="true" classString="!bg-white" />
@@ -51,14 +51,14 @@
                 help="Sleep bestand of klik om te uploaden" multiple="false"
                 :classes="{ outer: 'col-span-2', inner: '!max-w-full' }" />
             </div>
-            <Button label="Versturen" type="primary" :disabled="disabled"></Button>
+            <Button type="primary" :disabled="disabled">Versturen</Button>
           </FormKit>
 
         </div>
         <div class="basis-1/3">
           <!-- <Card> -->
+          <!-- <Card class="border-none !bg-neutral-200"> -->
           <Card class="!bg-neutral-100">
-            <!-- <Card class="border-none !bg-neutral-200"> -->
             <p class="mb-2">
               Leuk dat je op deze vacature wilt solliciteren! 💪 Om het sollicitatieproces zo soepel mogelijk te laten
               verlopen, moet je hier rekening mee houden:
@@ -83,7 +83,6 @@
 </template>
 
 <script setup lang="ts">
-// import type { UploadProps, UploadUserFile, UploadInstance, UploadRawFile } from 'element-plus';
 import { IConfirmDialogParams } from "~/types/ConfirmDialogParams";
 import { Database } from "~/types/Database";
 import { IJob } from "~/types/job/Job";
@@ -104,12 +103,6 @@ const job = ref<IJob | null>(null);
 const formValue = ref<any>();
 const applicationSuccess = ref<boolean>(false);
 const gifUrl = ref('');
-
-async function handleSubmit() {
-  // Our api request:
-  await new Promise((r) => setTimeout(r, 1000));
-  reset('applicationForm');
-}
 
 async function submitForm(form: any) {
   const resume = formValue.value.resume[0];
@@ -183,7 +176,6 @@ onBeforeRouteLeave((_to, _from, next) => {
 onMounted(() => {
   getJob();
   getGif();
-
 });
 
 const getGif = async () => {

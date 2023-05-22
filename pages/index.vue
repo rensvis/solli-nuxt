@@ -1,10 +1,9 @@
-<script>
-// redirect to /jobs
-export default {
-  mounted() {
-    this.$router.push('/jobs');
-  }
-};
+<script setup lang="ts">
+const router = useRouter();
+
+onMounted(() => {
+  router.push('/jobs');
+});
 </script>
 
 <template>

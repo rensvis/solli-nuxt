@@ -28,7 +28,7 @@ getGif()
     <div class="c-container md:mb-0">
       <h1 class="mb-10 text-4xl font-bold" style="overflow-wrap: anywhere;">404...</h1>
       <p class="mb-6">Oeps, die link bestaat niet (meer).</p>
-      <Button label="Naar home" to="/" class="mb-8"></Button>
+      <Button to="/" class="mb-8">Naar home</Button>
       <img v-if="gifUrl" :src="gifUrl" class="mb-8" alt="Success Gif" />
 
     </div>

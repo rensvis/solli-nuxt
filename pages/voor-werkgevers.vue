@@ -31,9 +31,9 @@
       </div>
 
       <div class="flex justify-center">
-        <Button label="Plaats een vacature"
+        <Button
           :to="'https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAa__abcTuNUNDVVTFEzWDlSWkRMMlpVMzg3NUExSTUwTi4u'"
-          type="primary" size="large"></Button>
+          type="primary" size="large">Plaats een vacature</Button>
       </div>
 
     </div>
