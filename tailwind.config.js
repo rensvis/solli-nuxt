@@ -1,3 +1,5 @@
+const formKitTailwind = require("@formkit/themes/tailwindcss");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -7,6 +9,7 @@ module.exports = {
     "./plugins/**/*.{js,ts}",
     "./nuxt.config.{js,ts}",
     "./app.vue",
+    "./formkit/theme.ts",
   ],
   theme: {
     fontFamily: {
@@ -14,5 +17,5 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [],
+  plugins: [formKitTailwind, require("@tailwindcss/container-queries")],
 };

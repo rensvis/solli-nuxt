@@ -1,6 +1,14 @@
 <script>
 </script>
 
-<template></template>
-
-<!-- <style scoped lang="scss"></style> -->
+<template>
+  <footer class="bg-neutral-200">
+    <div class="flex items-center justify-center py-20 c-container">
+      <NuxtLink to="/">
+        <div class="logo">
+          <img src="/images/solli-logo-color.png" alt="logo" class="h-10" />
+        </div>
+      </NuxtLink>
+    </div>
+  </footer>
+</template>

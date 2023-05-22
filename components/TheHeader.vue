@@ -1,3 +1,59 @@
+<template>
+  <header :class="headerClasses"
+    class="fixed top-0 left-0 right-0 z-10 flex items-center p-5 header md:text-lg bg-neutral-50">
+    <NuxtLink to="/">
+      <div class="logo">
+        <img src="/images/solli-s-logo.png" alt="logo" class="h-10" />
+      </div>
+    </NuxtLink>
+    <nav class="hidden ml-auto sm:block">
+      <ul class="flex">
+        <li class="mx-7">
+          <NuxtLink to="/voor-werkgevers">Voor werkgevers</NuxtLink>
+        </li>
+        <li class="">
+          <client-only>
+            <a href="https://www.instagram.com/solli.nl/" target="_blank" rel="noreferrer" class="">
+              <font-awesome-icon icon="fa-brands fa-instagram" class="text-xl" />
+            </a>
+          </client-only>
+        </li>
+        <!-- <li class="ml-7">
+                                <NuxtLink to="/about">About</NuxtLink>
+                                  </li> -->
+      </ul>
+    </nav>
+
+    <div class="ml-auto sm:hidden">
+      <div class="hamburger" v-on:click="toggleMobileMenu" :class="{ 'hamburger--open': isMobileMenuVisible }">
+        <div class="hamburger__line"></div>
+        <div class="hamburger__line"></div>
+      </div>
+    </div>
+    <div class="text-xl mobile-menu sm:hidden" :class="{ 'mobile-menu--visible': isMobileMenuVisible }">
+      <ul class="flex">
+        <li class="mx-7">
+          <NuxtLink to="/" v-on:click="toggleMobileMenu">Home</NuxtLink>
+        </li>
+        <li class="mx-7">
+          <NuxtLink to="/voor-werkgevers" v-on:click="toggleMobileMenu">Voor werkgevers</NuxtLink>
+        </li>
+        <li class="">
+          <client-only>
+            <a href="https://www.instagram.com/solli.nl/" target="_blank" rel="noreferrer" class="">
+              <font-awesome-icon icon="fa-brands fa-instagram" class="text-2xl" />
+            </a>
+          </client-only>
+        </li>
+        <!-- <li class="ml-7">
+                                <NuxtLink to="/about" v-on:click="toggleMobileMenu">About</NuxtLink>
+                              </li> -->
+      </ul>
+    </div>
+
+  </header>
+</template>
+
 <script>
 export default {
   data() {
@@ -25,7 +81,6 @@ export default {
       this.scrolledDown = window.scrollY > 0;
     },
     toggleMobileMenu() {
-      console.log('toggleMobileMenu');
       this.isMobileMenuVisible = !this.isMobileMenuVisible;
       if (this.isMobileMenuVisible) {
         document.body.style.overflow = 'hidden';
@@ -37,57 +92,6 @@ export default {
 };
 
 </script>
-<template>
-  <header :class="headerClasses"
-    class="fixed top-0 left-0 right-0 flex items-center p-5 header md:text-lg bg-neutral-200">
-    <NuxtLink to="/">
-      <div class="logo">
-      <img src="/images/solli-s-logo.png" alt="logo" class="h-10" />
-    </div>
-    </NuxtLink>
-    <nav class="hidden ml-auto sm:block">
-      <ul class="flex">
-        <li class="mx-7">
-          <NuxtLink to="/voor-werkgevers">Voor werkgevers</NuxtLink>
-        </li>
-        <li class="">
-          <a href="https://www.instagram.com/solli.nl/" target="_blank" rel="noreferrer" class="">
-            <font-awesome-icon icon="fa-brands fa-instagram" class="text-2xl" />
-          </a>
-        </li>
-        <!-- <li class="ml-7">
-                                <NuxtLink to="/about">About</NuxtLink>
-                                  </li> -->
-      </ul>
-    </nav>
-
-    <div class="ml-auto sm:hidden">
-      <div class="hamburger" v-on:click="toggleMobileMenu" :class="{ 'hamburger--open': isMobileMenuVisible }">
-        <div class="hamburger__line"></div>
-        <div class="hamburger__line"></div>
-      </div>
-    </div>
-    <div class="text-xl mobile-menu sm:hidden" :class="{ 'mobile-menu--visible': isMobileMenuVisible }">
-      <ul class="flex">
-        <li class="mx-7">
-          <NuxtLink to="/" v-on:click="toggleMobileMenu">Home</NuxtLink>
-        </li>
-        <li class="mx-7">
-          <NuxtLink to="/voor-werkgevers" v-on:click="toggleMobileMenu">Voor werkgevers</NuxtLink>
-        </li>
-        <li class="">
-          <a href="https://www.instagram.com/solli.nl/" target="_blank" rel="noreferrer" class="">
-            <font-awesome-icon icon="fa-brands fa-instagram" class="text-2xl" />
-          </a>
-        </li>
-        <!-- <li class="ml-7">
-                                <NuxtLink to="/about" v-on:click="toggleMobileMenu">About</NuxtLink>
-                              </li> -->
-      </ul>
-    </div>
-
-  </header>
-</template>
 
 <style scoped lang="scss">
 .logo,

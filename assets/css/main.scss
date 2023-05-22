@@ -9,15 +9,15 @@
 @layer components {
   /* custom containers */
   .c-container {
-    @apply mx-auto px-6;
+    @apply mx-auto px-3 sm:px-6 max-w-screen-xl;
   }
 
   .c-container--s {
-    @apply mx-auto px-6 max-w-5xl;
+    @apply mx-auto px-3 sm:px-6 max-w-5xl;
   }
 
   .c-container--xs {
-    @apply mx-auto px-6 max-w-3xl;
+    @apply mx-auto px-3 sm:px-6 max-w-3xl;
   }
 
   /* .btn-primary {
@@ -31,7 +31,15 @@
 
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.2s;
+  @media (prefers-reduced-motion) {
+    transition: none !important;
+  }
+}
+.page-enter-active {
+  transition: all 0.2s ease-out 0.2s;
+}
+.page-leave-active {
+  transition: all 0.2s ease-in;
 }
 .page-enter-from,
 .page-leave-to {
@@ -43,4 +51,8 @@
 }
 .page-enter-from {
   transform: translateY(-20px);
+}
+
+* {
+  box-sizing: border-box;
 }

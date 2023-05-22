@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <main class="bg-neutral-200">
+  <main class="bg-neutral-50">
     <slot></slot>
   </main>
 </template>
