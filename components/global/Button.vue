@@ -2,7 +2,7 @@
   <button v-if="!to" :class="[buttonClass, buttonSize, buttonDisabled]" @click="handleClick" :disabled="disabled">
     {{ label }}
   </button>
-  <NuxtLink v-else :to="to" :class="[buttonClass, buttonSize, buttonDisabled]">
+  <NuxtLink v-else :to="to" :class="[buttonClass, buttonSize, buttonDisabled]" class="inline-block">
     {{ label }}
   </NuxtLink>
 </template>
