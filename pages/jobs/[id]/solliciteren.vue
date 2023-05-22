@@ -96,6 +96,8 @@ const {
 
 const route = useRoute();
 const supabaseClient = useSupabaseClient<Database>();
+const gtag = useGtag();
+
 
 const jobId = route.params.id as string;
 const job = ref<IJob | null>(null);
@@ -147,13 +149,19 @@ async function submitForm(form: any) {
         resume_path: resumePath,
         resume_url: resumeUrl,
       }
-    ]);
+    ]).select();
 
   if (applicationError) {
     return console.error('Error inserting application:', applicationError);
   } else {
     applicationSuccess.value = true;
     reset('applicationForm');
+    gtag('event', 'application', {
+      application_id: applicationData[0].id,
+      job_id: jobId,
+      job_name: job.value?.name,
+      age: form.age,
+    });
   }
 };
 
