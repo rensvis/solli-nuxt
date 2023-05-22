@@ -28,11 +28,11 @@
           <h2 class="mb-2 text-2xl font-medium">Beschrijving</h2>
           <p class="mb-10 whitespace-pre-wrap">{{ job.description }}</p>
 
-          <div class="grid grid-cols-2 gap-y-10 gap-x-4">
-            <div v-for="(value, key, i) in highlightsMap" :key="key" class="max-[475px]:col-span-2"
+          <div class="grid grid-cols-2 gap-y-10 gap-x-8 @container">
+            <div v-for="(value, key, i) in highlightsMap" :key="key" class="@[540px]:col-span-1 col-span-2"
               :class="[i === 2 ? 'col-span-2' : 'col-span-1']">
               <h2 class="mb-2 text-2xl font-medium">{{ key }}</h2>
-              <HighlightList v-if="i < 2" :items="value"></HighlightList>
+              <HighlightList v-if="['Vereisten', 'Voorkeur'].includes(key)" :items="value"></HighlightList>
               <ul v-else class="flex flex-wrap gap-2">
                 <li v-for="(benefit, i) in job.benefits" :key="i"
                   class="px-3 py-1 text-sm rounded text-neutral-600 bg-neutral-200">{{ benefit }}
