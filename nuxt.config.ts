@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     "@element-plus/nuxt",
     "@nuxt/content",
     "nuxt-gtag",
+    "nuxt3-meta-pixel",
   ],
   css: [
     "~/assets/css/main.scss",
@@ -19,7 +20,6 @@ export default defineNuxtConfig({
     },
   },
   plugins: [
-    // "~/plugins/fontawesome.js",
     { src: "~/plugins/fontawesome.js", mode: "client" },
     { src: "~/plugins/vercel.ts", mode: "client" },
     "~/plugins/auto-animate.js",
@@ -43,5 +43,12 @@ export default defineNuxtConfig({
   },
   gtag: {
     id: "G-Q6J68JPB1E",
+  },
+  facebook: {
+    /* module options */
+    track: "PageView",
+    pixelId: "240121868657739",
+    autoPageView: true,
+    disabled: false,
   },
 });
