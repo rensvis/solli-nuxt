@@ -8,7 +8,10 @@
     </NuxtLink>
     <nav class="hidden ml-auto sm:block">
       <ul class="flex">
-        <li class="mx-7">
+        <li class="mx-3">
+          <NuxtLink to="/jobs">Alle baantjes</NuxtLink>
+        </li>
+        <li class="mx-3 mr-16">
           <NuxtLink to="/voor-werkgevers">Voor werkgevers</NuxtLink>
         </li>
         <li class="">
@@ -32,11 +35,14 @@
     </div>
     <div class="text-xl mobile-menu sm:hidden" :class="{ 'mobile-menu--visible': isMobileMenuVisible }">
       <ul class="flex">
-        <li class="mx-7">
+        <!-- <li class="mx-7">
           <NuxtLink to="/" v-on:click="toggleMobileMenu">Home</NuxtLink>
+        </li> -->
+        <li class="mx-7">
+          <NuxtLink to="/jobs" v-on:click="toggleMobileMenu" class="block mx-2">Alle baantjes</NuxtLink>
         </li>
         <li class="mx-7">
-          <NuxtLink to="/voor-werkgevers" v-on:click="toggleMobileMenu">Voor werkgevers</NuxtLink>
+          <NuxtLink to="/voor-werkgevers" v-on:click="toggleMobileMenu" class="block mx-2">Voor werkgevers</NuxtLink>
         </li>
         <li class="">
           <client-only>
