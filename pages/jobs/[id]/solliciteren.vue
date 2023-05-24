@@ -132,8 +132,8 @@ async function submitForm(form: any) {
     .insert([
       {
         job_id: jobId,
-        first_name: form.firstname,
-        last_name: form.lastname,
+        first_name: capitalize(form.firstname),
+        last_name: capitalize(form.lastname),
         email: form.email,
         phone_number: form.phone,
         start_date: form.startDate,

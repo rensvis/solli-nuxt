@@ -2,8 +2,9 @@
   <div class="py-24">
     <div class="c-container md:mb-0">
       <h1 class="mb-10 text-4xl font-bold" style="overflow-wrap: anywhere;">Nieuwe sollicitatie</h1>
+      <!-- <ApplicationDetailPageSkeleton v-if="flashSkeleton"></ApplicationDetailPageSkeleton> -->
       <ApplicationDetailPageSkeleton v-if="!application"></ApplicationDetailPageSkeleton>
-      <div v-else class="flex flex-col lg:gap-10 lg:flex-row">
+      <div v-else-if="application" class="flex flex-col lg:gap-10 lg:flex-row">
 
         <div class="basis-1/3 lg:order-2">
           <div class="mb-10">
@@ -11,7 +12,7 @@
             <Card>
               <div class="flex items-center gap-4 mb-4">
                 <div class="flex items-center justify-center bg-indigo-300 rounded-lg w-14 h-14">
-                  <span class="text-xl font-bold text-indigo-800 initials">{{ applicantInitials }}</span>
+                  <span class="text-xl font-bold text-indigo-800 uppercase initials">{{ applicantInitials }}</span>
                 </div>
                 <div class="leading-tight">
                   <div class="text-lg">
@@ -72,11 +73,12 @@
           <div class="mb-10">
             <div class="mb-3 text-lg">Motivatie</div>
             <Card class="border-none !bg-neutral-200">
-              <div :class="{ 'application-motivation-card--open': motivationIsOpen }" class="application-motivation-card">
+              <div :class="{ 'application-motivation-card--open': motivationIsOpen || !showExpandMotivation }"
+                class="application-motivation-card">
                 <div class="application-motivation-card__content styled-text" v-html="renderedMotivation"></div>
               </div>
               <div class="flex justify-center">
-                <Button type="textbutton" :onClick="toggleMotivation">
+                <Button v-if="showExpandMotivation" type="textbutton" :onClick="toggleMotivation">
                   {{ motivationIsOpen ? 'Minder weergeven' : 'Meer weergeven' }}
                   <font-awesome-icon :icon="['fas', `chevron-${motivationIsOpen ? 'up' : 'down'}`]" size="xs" />
                 </Button>
@@ -131,6 +133,11 @@ const application = ref<IApplication | null>(null);
 const job = ref<IJob | null>(null);
 const motivationIsOpen = ref<boolean>(false);
 
+const flashSkeleton = ref(false);
+// setInterval(() => {
+//   flashSkeleton.value = !flashSkeleton.value;
+// }, 1000);
+
 const formattedWhatsappNumber = computed(() => {
   if (!application.value) return '';
   console.log(application.value);
@@ -149,8 +156,14 @@ const formattedApplicationDate = computed(() => {
       'numeric', hour: 'numeric', minute: 'numeric'
   });
   return dateString.charAt(0).toUpperCase() + dateString.slice(1);
-
 });
+
+const showExpandMotivation = computed(() => {
+  if (!application.value) return false;
+  return application.value.motivation.split(' ').length > 100;
+});
+
+
 
 // set noindex
 useHead({
@@ -165,7 +178,7 @@ onMounted(() => {
 
 const applicantInitials = computed(() => {
   if (!application.value) return '';
-  return `${application.value.first_name.charAt(0)}${application.value.last_name.charAt(0)}`;
+  return `${capitalize(application.value.first_name.charAt(0))}${application.value.last_name.charAt(0)}`;
 });
 
 const renderedMotivation = computed(() => {
