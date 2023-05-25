@@ -24,6 +24,7 @@ export default defineNuxtConfig({
     { src: "~/plugins/vercel.ts", mode: "client" },
     "~/plugins/auto-animate.js",
     "~/plugins/vue-timeago.js",
+    "~/plugins/vue-hotjar-next.client.js",
   ],
   app: {
     head: {
