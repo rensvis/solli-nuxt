@@ -47,13 +47,13 @@ const isExternalLink = computed(() => {
 const buttonClass = computed(() => {
   switch (type.value) {
     case 'outlined':
-      return 'rounded border border-blue-500 text-blue-500';
+      return 'rounded border border-keppel-500 text-keppel-500';
     case 'textbutton':
-      return 'rounded text-blue-500';
+      return 'rounded text-keppel-500';
     case 'danger':
       return 'rounded bg-red-400 text-white';
     default:
-      return 'rounded bg-blue-500 text-white';
+      return 'rounded bg-keppel-500 text-white';
   }
 });
 

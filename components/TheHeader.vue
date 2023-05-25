@@ -1,103 +1,129 @@
 <template>
-  <header :class="headerClasses"
-    class="fixed top-0 left-0 right-0 z-10 flex items-center p-5 header md:text-lg bg-neutral-50">
-    <NuxtLink to="/">
-      <div class="logo">
-        <img src="/images/solli-s-logo.png" alt="logo" class="h-10" />
-      </div>
-    </NuxtLink>
-    <nav class="hidden ml-auto sm:block">
-      <ul class="flex">
-        <li class="mx-3">
-          <NuxtLink to="/jobs">Alle baantjes</NuxtLink>
-        </li>
-        <li class="mx-3 mr-16">
-          <NuxtLink to="/voor-werkgevers">Voor werkgevers</NuxtLink>
-        </li>
-        <li class="">
-          <client-only>
-            <a href="https://www.instagram.com/solli.nl/" target="_blank" rel="noreferrer" class="">
-              <font-awesome-icon icon="fa-brands fa-instagram" class="text-xl" />
-            </a>
-          </client-only>
-        </li>
-        <!-- <li class="ml-7">
-                                <NuxtLink to="/about">About</NuxtLink>
-                                  </li> -->
-      </ul>
-    </nav>
-
-    <div class="ml-auto sm:hidden">
-      <div class="hamburger" v-on:click="toggleMobileMenu" :class="{ 'hamburger--open': isMobileMenuVisible }">
-        <div class="hamburger__line"></div>
-        <div class="hamburger__line"></div>
+  <header :class="headerClasses" class="sticky top-0 left-0 right-0 z-10 ">
+    <div class="banner" :class="{ 'banner--open': showBanner }">
+      <div class="w-full bg-texas-200 banner__content">
+        <div class="flex items-start justify-between p-4">
+          <div></div>
+          <p class="my-auto lg:text-center">
+            🫵 Ben jij één van de eerte <b>10 sollicitanten</b> die een bijbaantje vindt via Solli? Dan win jij een
+            <b>cadeaubon t.w.v. 20 euro</b> van een lokale ondernemer voor een lekkere lunch, ijskoffie of
+            woonaccessoires.
+            ⭐️😍💪
+          </p>
+          <div class="basis-12 shrink-0">
+            <client-only>
+              <font-awesome-icon icon="fas fa-xmark" size="lg" class="p-1 mt-px ml-6 text-lg cursor-pointer"
+                @click="hideBanner" />
+            </client-only>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="text-xl mobile-menu sm:hidden" :class="{ 'mobile-menu--visible': isMobileMenuVisible }">
-      <ul class="flex">
-        <!-- <li class="mx-7">
-          <NuxtLink to="/" v-on:click="toggleMobileMenu">Home</NuxtLink>
-        </li> -->
-        <li class="mx-7">
-          <NuxtLink to="/jobs" v-on:click="toggleMobileMenu" class="block mx-2">Alle baantjes</NuxtLink>
-        </li>
-        <li class="mx-7">
-          <NuxtLink to="/voor-werkgevers" v-on:click="toggleMobileMenu" class="block mx-2">Voor werkgevers</NuxtLink>
-        </li>
-        <li class="">
-          <client-only>
-            <a href="https://www.instagram.com/solli.nl/" target="_blank" rel="noreferrer" class="">
-              <font-awesome-icon icon="fa-brands fa-instagram" class="text-2xl" />
-            </a>
-          </client-only>
-        </li>
-        <!-- <li class="ml-7">
-                                <NuxtLink to="/about" v-on:click="toggleMobileMenu">About</NuxtLink>
-                              </li> -->
-      </ul>
-    </div>
+    <div class="flex items-center p-5 header md:text-lg bg-neutral-50">
+      <NuxtLink to="/">
+        <div class="logo">
+          <img src="/images/solli-s-logo.png" alt="logo" class="h-10" />
+        </div>
+      </NuxtLink>
+      <nav class="hidden ml-auto sm:block">
+        <ul class="flex">
+          <li class="mx-3">
+            <NuxtLink to="/jobs">Alle baantjes</NuxtLink>
+          </li>
+          <li class="mx-3 mr-16">
+            <NuxtLink to="/voor-werkgevers">Voor werkgevers</NuxtLink>
+          </li>
+          <li class="">
+            <client-only>
+              <a href="https://www.instagram.com/solli.nl/" target="_blank" rel="noreferrer" class="">
+                <font-awesome-icon icon="fa-brands fa-instagram" class="text-xl" />
+              </a>
+            </client-only>
+          </li>
+        </ul>
+      </nav>
 
+      <div class="ml-auto sm:hidden">
+        <div class="hamburger" v-on:click="toggleMobileMenu" :class="{ 'hamburger--open': isMobileMenuVisible }">
+          <div class="hamburger__line"></div>
+          <div class="hamburger__line"></div>
+        </div>
+      </div>
+      <div class="text-xl mobile-menu sm:hidden" :class="{ 'mobile-menu--visible': isMobileMenuVisible }">
+        <ul class="flex">
+          <li class="mx-7">
+            <NuxtLink to="/jobs" v-on:click="toggleMobileMenu" class="block mx-2">Alle baantjes</NuxtLink>
+          </li>
+          <li class="mx-7">
+            <NuxtLink to="/voor-werkgevers" v-on:click="toggleMobileMenu" class="block mx-2">Voor werkgevers</NuxtLink>
+          </li>
+          <li class="">
+            <client-only>
+              <a href="https://www.instagram.com/solli.nl/" target="_blank" rel="noreferrer" class="">
+                <font-awesome-icon icon="fa-brands fa-instagram" class="text-2xl" />
+              </a>
+            </client-only>
+          </li>
+        </ul>
+      </div>
+
+    </div>
   </header>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      isMobileMenuVisible: false,
-      scrolledDown: false,
-    };
-  },
-  computed: {
-    headerClasses() {
-      return [
-        'transition-shadow',
-        this.scrolledDown ? 'shadow-md' : 'shadow-none',
-      ];
-    },
-  },
-  mounted() {
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  beforeUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  },
-  methods: {
-    handleScroll() {
-      this.scrolledDown = window.scrollY > 0;
-    },
-    toggleMobileMenu() {
-      this.isMobileMenuVisible = !this.isMobileMenuVisible;
-      if (this.isMobileMenuVisible) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = 'auto';
-      }
-    }
-  },
-};
+<style lang="scss">
+.banner {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .5s ease-in-out;
 
+  &__content {
+    overflow: hidden;
+    grid-row: span 2;
+  }
+
+  &--open {
+    grid-template-rows: 1fr;
+  }
+}
+</style>
+
+<script setup lang="ts">
+const isMobileMenuVisible = ref(false);
+let scrolledDown = ref(false);
+const showBanner = ref(true);
+
+const headerClasses = computed(() => {
+  return [
+    'transition-shadow',
+    scrolledDown.value ? 'shadow-md' : 'shadow-none',
+  ];
+});
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
+
+const handleScroll = () => {
+  scrolledDown.value = window.scrollY > 0;
+};
+const toggleMobileMenu = () => {
+  isMobileMenuVisible.value = !isMobileMenuVisible.value;
+  if (isMobileMenuVisible.value) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = 'auto';
+  }
+};
+const hideBanner = () => {
+  showBanner.value = false;
+};
 </script>
+
 
 <style scoped lang="scss">
 .logo,

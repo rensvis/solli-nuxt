@@ -1,5 +1,5 @@
 <template>
-  <div class="py-24">
+  <div class="py-10">
     <div class="c-container md:mb-0">
       <h1 class="mb-10 text-4xl font-bold" style="overflow-wrap: anywhere;">Nieuwe sollicitatie</h1>
       <!-- <ApplicationDetailPageSkeleton v-if="flashSkeleton"></ApplicationDetailPageSkeleton> -->

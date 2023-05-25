@@ -24,7 +24,7 @@ getGif()
 </script>
 
 <template>
-  <div class="py-24">
+  <div class="py-10">
     <div class="c-container md:mb-0">
       <h1 class="mb-10 text-4xl font-bold" style="overflow-wrap: anywhere;">404...</h1>
       <p class="mb-6">Oeps, die link bestaat niet (meer).</p>

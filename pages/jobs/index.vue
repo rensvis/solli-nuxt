@@ -1,5 +1,5 @@
 <template>
-  <div class="py-24 c-container">
+  <div class="py-10 c-container">
     <div class="gap-10 lg:flex">
       <section class="basis-1/4">
         <Card padding="large" borderRadius="large" class="mb-4 lg:mb-0">

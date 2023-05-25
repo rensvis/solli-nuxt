@@ -1,5 +1,5 @@
 <template>
-  <div class="py-24">
+  <div class="py-10">
     <div class="c-container md:mb-0">
       <!-- <JobDetailPageSkeleton v-if="flashSkeleton"></JobDetailPageSkeleton> -->
       <JobDetailPageSkeleton v-if="!job"></JobDetailPageSkeleton>
@@ -15,8 +15,7 @@
             </div>
             <div>
               <NuxtLink :to="`${currentRoutePath}/solliciteren`">
-                <el-button type="primary" tag="div" size="large"
-                  class="!text-lg !p-6 !hidden md:!flex">Solliciteren</el-button>
+                <Button type="primary" :to="`${currentRoutePath}/solliciteren`" size="large">Solliciteren</Button>
               </NuxtLink>
               <!-- <Button type="solid" label="Solliciteren" :to="{ path: `${currentRoutePath}/solliciteren` }"
                 class="hidden md:block"></Button> -->
@@ -60,9 +59,8 @@
       :class="{ 'solliciteer-card--sticky !mx-0 border-none rounded-none': !sCInViewReferenceElementInView }">
       <!-- <Button type="solid" label="Solliciteren" size="large" :disabled="!Boolean(job)"
         :to="{ path: `${currentRoutePath}/solliciteren` }" class="w-full text-center"></Button> -->
-      <NuxtLink :to="`${currentRoutePath}/solliciteren`" class="w-full">
-        <el-button type="primary" tag="div" size="large" class="!text-xl !p-7 !w-full">Solliciteren</el-button>
-      </NuxtLink>
+      <Button type="primary" :to="`${currentRoutePath}/solliciteren`" size="large"
+        class="w-full text-center">Solliciteren</Button>
     </Card>
     <div ref="sCInViewReferenceElement" class="h-px mb-10 md:hidden "></div>
 
