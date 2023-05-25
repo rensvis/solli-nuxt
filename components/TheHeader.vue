@@ -5,7 +5,7 @@
         <div class="flex items-start justify-between p-4">
           <div></div>
           <p class="my-auto lg:text-center">
-            🫵 Ben jij één van de eerte <b>10 sollicitanten</b> die een bijbaantje vindt via Solli? Dan win jij een
+            🫵 Ben jij één van de eerste <b>10 sollicitanten</b> die een bijbaantje vindt via Solli? Dan win jij een
             <b>cadeaubon t.w.v. 20 euro</b> van een lokale ondernemer voor een lekkere lunch, ijskoffie of
             woonaccessoires.
             ⭐️😍💪
