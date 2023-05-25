@@ -1,9 +1,10 @@
 <template>
-  <button v-if="!to" :class="[buttonClass, buttonSize, buttonDisabled]" @click="handleClick" :disabled="disabled">
+  <button v-if="!to" :class="[baseClass, buttonClass, buttonSize, buttonDisabled]" @click="handleClick"
+    :disabled="disabled">
     <slot></slot>
   </button>
-  <NuxtLink v-else :to="to" :class="[buttonClass, buttonSize, buttonDisabled]" :target="isExternalLink ? '_blank' : ''"
-    class="inline-block">
+  <NuxtLink v-else :to="to" :class="[baseClass, buttonClass, buttonSize, buttonDisabled]"
+    :target="isExternalLink ? '_blank' : ''" class="inline-block">
     <slot></slot>
   </NuxtLink>
 </template>
@@ -43,17 +44,19 @@ const isExternalLink = computed(() => {
   return (to.value && to.value['startsWith'] && to.value?.startsWith('https'));
 });
 
+const baseClass = 'transition';
+
 // Compute button class based on type
 const buttonClass = computed(() => {
   switch (type.value) {
     case 'outlined':
-      return 'rounded border border-keppel-500 text-keppel-500';
+      return 'rounded border border-keppel-500 text-keppel-500 hover:bg-keppel-100';
     case 'textbutton':
-      return 'rounded text-keppel-500';
+      return 'rounded text-keppel-500 hover:bg-keppel-100';
     case 'danger':
       return 'rounded bg-red-400 text-white';
     default:
-      return 'rounded bg-keppel-500 text-white';
+      return 'rounded bg-keppel-500 text-white hover:bg-keppel-600';
   }
 });
 

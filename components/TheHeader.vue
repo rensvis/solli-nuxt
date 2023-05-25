@@ -1,7 +1,7 @@
 <template>
   <header :class="headerClasses" class="sticky top-0 left-0 right-0 z-10 ">
     <div class="banner" :class="{ 'banner--open': showBanner }">
-      <div class="w-full bg-texas-200 banner__content">
+      <div class="w-full bg-texas-100 banner__content">
         <div class="flex items-start justify-between p-4">
           <div></div>
           <p class="my-auto lg:text-center">

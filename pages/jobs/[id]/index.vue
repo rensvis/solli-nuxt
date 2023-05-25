@@ -7,7 +7,7 @@
         <div class="basis-2/3">
           <div class="flex justify-between gap-4">
             <div class="">
-              <h1 class="mb-4 text-4xl font-bold" style="overflow-wrap: anywhere;">{{ job.name }}</h1>
+              <h1 class="mb-4 text-4xl font-bold" style="overflow-wrap: anywhere;">{{ capitalize(job.name) }}</h1>
               <div class="flex flex-wrap items-center gap-3 mb-2">
                 <p class="text-lg leading-tight text-neutral-500">{{ job.company.name }}</p>
                 <EmploymentTypePill :hoursPerWeekMin="job.hours_per_week_min" class="float-right"></EmploymentTypePill>
