@@ -14,7 +14,7 @@
               </div>
             </div>
             <div>
-              <NuxtLink :to="`${currentRoutePath}/solliciteren`">
+              <NuxtLink :to="`${currentRoutePath}/solliciteren`" class="hidden md:block">
                 <Button type="primary" :to="`${currentRoutePath}/solliciteren`" size="large">Solliciteren</Button>
               </NuxtLink>
               <!-- <Button type="solid" label="Solliciteren" :to="{ path: `${currentRoutePath}/solliciteren` }"

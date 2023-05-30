@@ -10,7 +10,7 @@
             <img :src="job.company.logo_url" :alt="`${job.company.name} logo`"
               class="object-contain w-full h-full text-xs">
           </div>
-          <div class="leading-none ">
+          <div class="leading-none" style="word-break: break-word">
             <h3 class="mb-2 text-xl font-bold">{{ job.name }}</h3>
             <p class="text-neutral-500">{{ job.company.name }}</p>
           </div>
