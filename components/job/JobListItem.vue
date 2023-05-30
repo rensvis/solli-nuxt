@@ -7,7 +7,7 @@
         <div class="flex items-center gap-4">
           <div
             class="flex items-center justify-center flex-shrink w-16 h-16 p-2 bg-white rounded-lg sm:w-20 sm:h-20 aspect-square">
-            <img :src="job.company.logo_url" :alt="`${job.company.name} logo`"
+            <img :src="imageUrl" :alt="`${job.company.name} logo`" height="48px" width="48px"
               class="object-contain w-full h-full text-xs">
           </div>
           <div class="leading-none ">
@@ -35,8 +35,8 @@
         <div class="flex items-center gap-4 mb-4">
           <div
             class="flex items-center justify-center flex-shrink w-16 h-16 p-2 bg-white rounded-lg sm:w-20 sm:h-20 aspect-square">
-            <img :src="job.company.logo_url" :alt="`${job.company.name} logo`"
-              class="object-contain w-full h-full text-xs">
+            <!-- <img :src="`${job.company.logo_url}`" :alt="`${job.company.name} logo`" height="64px" width="64px"
+              class="object-contain w-full h-full text-xs"> -->
           </div>
           <div class="leading-none ">
             <div class="flex items-center gap-4 mb-2 mr-2">
@@ -64,7 +64,10 @@
 
 <script setup lang="ts">
 import nl from 'date-fns/locale/nl/index.js'; // import custom locale
+import { Database } from "~/types/Database";
 import { IJob } from "~/types/job/Job";
+
+const supabaseClient = useSupabaseClient<Database>();
 
 const props = defineProps({
   job: {
@@ -75,6 +78,23 @@ const props = defineProps({
     type: String,
     default: '',
   }
+});
+
+
+
+const imageUrl = computed(() => {
+  // console.log(props.job.company.logo_path);
+  // const url = await supabaseClient.storage.from('logos').download('7ta-logo.jpg');
+  const { data: { publicUrl } } = supabaseClient.storage.from('logos').getPublicUrl("vaping.jpeg", {
+    // const { data: { publicUrl } } = supabaseClient.storage.from('logos').getPublicUrl(props.job.company.logo_path, {
+    transform: {
+      width: 64,
+      height: 64,
+      resize: 'contain'
+    },
+  });
+  console.log(publicUrl);
+  return publicUrl;
 });
 
 const jobDescriptionShort = computed(() => {

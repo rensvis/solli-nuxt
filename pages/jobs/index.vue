@@ -58,6 +58,8 @@
 </template>
 
 <script setup lang="ts">
+const supabaseClient = useSupabaseClient();
+
 interface State {
   jobs: any[],
   jobsLoading: Boolean,
@@ -105,24 +107,19 @@ let showClearFilters = computed(() => {
   return state.searchTerm !== '';
 });
 
-onMounted(() => {
-  fetchJobs();
-
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && state.totalInQuery !== state.totalOnPage && state.init) {
-        // Load more jobs
-        state.page += 1;
-        fetchJobs();
-      }
-    });
-  });
-
-  observer.observe(loadMoreRef.value!);
-});
-
-const blurInput = () => {
-  (document.activeElement! as any).blur();
+const getSortParams = (sortDirection: SortDirection) => {
+  switch (sortDirection) {
+    case SortDirection.DateAscending:
+      return { sortingColumn: 'created_at', isAscending: true };
+    case SortDirection.DateDescending:
+      return { sortingColumn: 'created_at', isAscending: false };
+    case SortDirection.SalaryAscending:
+      return { sortingColumn: 'salary', isAscending: true };
+    case SortDirection.SalaryDescending:
+      return { sortingColumn: 'salary', isAscending: false };
+    default:
+      throw new Error(`Unknown sort direction: ${sortDirection}`);
+  }
 };
 
 const fetchJobs = (async () => {
@@ -152,20 +149,37 @@ const fetchJobs = (async () => {
   state.jobsLoading = false;
 });
 
-const getSortParams = (sortDirection: SortDirection) => {
-  switch (sortDirection) {
-    case SortDirection.DateAscending:
-      return { sortingColumn: 'created_at', isAscending: true };
-    case SortDirection.DateDescending:
-      return { sortingColumn: 'created_at', isAscending: false };
-    case SortDirection.SalaryAscending:
-      return { sortingColumn: 'salary', isAscending: true };
-    case SortDirection.SalaryDescending:
-      return { sortingColumn: 'salary', isAscending: false };
-    default:
-      throw new Error(`Unknown sort direction: ${sortDirection}`);
-  }
+useAsyncData('jobs', async () => {
+  fetchJobs();
+}, {
+  watch: [() => state.searchTerm, () => state.sortDirection, () => state.page],
+});
+
+onMounted(() => {
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && state.totalInQuery !== state.totalOnPage && state.init) {
+        state.page += 1;
+      }
+    });
+  });
+  observer.observe(loadMoreRef.value!);
+});
+
+onMounted(async () => {
+  const { data, error } = await supabaseClient
+    .storage
+    .from('logos')
+    .list();
+  console.log('buckets', data);
+});
+
+
+
+const blurInput = () => {
+  (document.activeElement! as any).blur();
 };
+
 
 
 const resetFilters = () => {

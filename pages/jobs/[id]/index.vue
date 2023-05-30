@@ -14,13 +14,7 @@
               </div>
             </div>
             <div>
-              <NuxtLink :to="`${currentRoutePath}/solliciteren`">
-                <Button type="primary" :to="`${currentRoutePath}/solliciteren`" size="large">Solliciteren</Button>
-              </NuxtLink>
-              <!-- <Button type="solid" label="Solliciteren" :to="{ path: `${currentRoutePath}/solliciteren` }"
-                class="hidden md:block"></Button> -->
-
-
+              <Button type="primary" :to="`${currentRoutePath}/solliciteren`" size="large">Solliciteren</Button>
             </div>
           </div>
           <HorizontalRuler></HorizontalRuler>
@@ -120,11 +114,6 @@ const highlightsMap = computed(() => {
 //   flashSkeleton.value = !flashSkeleton.value;
 // }, 1000);
 
-onMounted(() => {
-  getJob();
-  fetchRelatedJobs();
-});
-
 const getJob = async () => {
   const { data, error } = await client
     .from('jobs')
@@ -138,12 +127,11 @@ const getJob = async () => {
 
   if (error) {
     console.error('Error fetching job details:', error);
-  } else {
-    job.value = data as unknown as IJob;
   }
+  return data as unknown as IJob;
 };
 
-const fetchRelatedJobs = (async () => {
+const getRelatedJobs = (async () => {
   const { data, error } = await client
     .from('jobs')
     .select(`
@@ -155,7 +143,15 @@ const fetchRelatedJobs = (async () => {
     .neq('id', jobId)
     .limit(3)
     .order('created_at', { ascending: false });
-  relatedJobs.value = (data ?? []);
+  return data ?? [];
+});
+
+useAsyncData('jobs', async () => {
+  job.value = await getJob();
+});
+
+useAsyncData('relatedJobs', async () => {
+  relatedJobs.value = await getRelatedJobs();
 });
 
 </script>

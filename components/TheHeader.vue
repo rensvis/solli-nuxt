@@ -1,24 +1,24 @@
 <template>
-  <header :class="headerClasses" class="sticky top-0 left-0 right-0 z-10 ">
-    <div class="banner" :class="{ 'banner--open': showBanner }">
-      <div class="w-full bg-texas-100 banner__content">
-        <div class="flex items-start justify-between p-4">
-          <div></div>
-          <p class="my-auto lg:text-center">
-            🫵 Ben jij één van de eerste <b>10 sollicitanten</b> die een bijbaantje vindt via Solli? Dan win jij een
-            <b>cadeaubon t.w.v. 20 euro</b> van een lokale ondernemer voor een lekkere lunch, ijskoffie of
-            woonaccessoires.
-            ⭐️😍💪
-          </p>
-          <div class="basis-12 shrink-0">
-            <client-only>
-              <font-awesome-icon icon="fas fa-xmark" size="lg" class="p-1 mt-px ml-6 text-lg cursor-pointer"
-                @click="hideBanner" />
-            </client-only>
-          </div>
+  <div class="banner" :class="{ 'banner--open': showBanner }">
+    <div class="w-full bg-texas-100 banner__content">
+      <div class="flex items-start justify-between p-4">
+        <div></div>
+        <p class="my-auto lg:text-center">
+          🫵 Ben jij één van de eerste <b>10 sollicitanten</b> die een bijbaantje vindt via Solli? Dan win jij een
+          <b>cadeaubon t.w.v. 20 euro</b> van een lokale ondernemer voor een lekkere lunch, ijskoffie of
+          woonaccessoires.
+          ⭐️😍💪
+        </p>
+        <div class="basis-12 shrink-0">
+          <client-only>
+            <font-awesome-icon icon="fas fa-xmark" size="lg" class="p-1 mt-px ml-6 text-lg cursor-pointer"
+              @click="hideBanner" />
+          </client-only>
         </div>
       </div>
     </div>
+  </div>
+  <header :class="headerClasses" class="sticky top-0 left-0 right-0 z-10 ">
     <div class="flex items-center p-5 header md:text-lg bg-neutral-50">
       <NuxtLink to="/">
         <div class="logo">

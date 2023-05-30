@@ -163,26 +163,11 @@ const showExpandMotivation = computed(() => {
   return application.value.motivation.split(' ').length > 100;
 });
 
-
-
 // set noindex
 useHead({
   meta: [{
     hid: 'robots', name: 'robots', content: 'noindex'
   }]
-});
-
-onMounted(() => {
-  setData();
-});
-
-const applicantInitials = computed(() => {
-  if (!application.value) return '';
-  return `${capitalize(application.value.first_name.charAt(0))}${application.value.last_name.charAt(0)}`;
-});
-
-const renderedMotivation = computed(() => {
-  return marked.parse(application.value?.motivation ?? '');
 });
 
 const setData = async () => {
@@ -212,6 +197,20 @@ const setData = async () => {
   if (jobError) return console.error('Error fetching job details:', jobError);
   job.value = jobData as unknown as IJob;
 };
+
+useAsyncData(async () => {
+  setData();
+});
+
+const applicantInitials = computed(() => {
+  if (!application.value) return '';
+  return `${capitalize(application.value.first_name.charAt(0))}${application.value.last_name.charAt(0)}`;
+});
+
+const renderedMotivation = computed(() => {
+  return marked.parse(application.value?.motivation ?? '');
+});
+
 
 
 
