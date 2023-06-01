@@ -133,6 +133,15 @@ const application = ref<IApplication | null>(null);
 const job = ref<IJob | null>(null);
 const motivationIsOpen = ref<boolean>(false);
 
+useHead({
+  meta: [{
+    hid: 'description',
+    name: 'description',
+    content: `Nieuwe sollicitatie`
+  }],
+  title: 'Nieuwe sollicitatie'
+});
+
 const flashSkeleton = ref(false);
 // setInterval(() => {
 //   flashSkeleton.value = !flashSkeleton.value;
@@ -140,8 +149,6 @@ const flashSkeleton = ref(false);
 
 const formattedWhatsappNumber = computed(() => {
   if (!application.value) return '';
-  console.log(application.value);
-  console.log(`31${application.value.phone_number.replace(/\s/g, '').substring(1)}`);
   return `31${application.value.phone_number.replace(/\s/g, '').substring(1)}`;
 });
 
@@ -163,26 +170,11 @@ const showExpandMotivation = computed(() => {
   return application.value.motivation.split(' ').length > 100;
 });
 
-
-
 // set noindex
 useHead({
   meta: [{
     hid: 'robots', name: 'robots', content: 'noindex'
   }]
-});
-
-onMounted(() => {
-  setData();
-});
-
-const applicantInitials = computed(() => {
-  if (!application.value) return '';
-  return `${capitalize(application.value.first_name.charAt(0))}${application.value.last_name.charAt(0)}`;
-});
-
-const renderedMotivation = computed(() => {
-  return marked.parse(application.value?.motivation ?? '');
 });
 
 const setData = async () => {
@@ -212,6 +204,28 @@ const setData = async () => {
   if (jobError) return console.error('Error fetching job details:', jobError);
   job.value = jobData as unknown as IJob;
 };
+
+useAsyncData(async () => {
+  await setData();
+  useHead({
+    meta: [{
+      hid: 'description',
+      name: 'description',
+      content: `Nieuwe sollicitatie van ${capitalize(application.value?.first_name ?? '')} op ${capitalize(job.value?.name ?? '')}`
+    }],
+    title: 'Nieuwe sollicitatie'
+  });
+});
+
+const applicantInitials = computed(() => {
+  if (!application.value) return '';
+  return `${capitalize(application.value.first_name.charAt(0))}${application.value.last_name.charAt(0)}`;
+});
+
+const renderedMotivation = computed(() => {
+  return marked.parse(application.value?.motivation ?? '');
+});
+
 
 
 

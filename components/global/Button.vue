@@ -44,7 +44,7 @@ const isExternalLink = computed(() => {
   return (to.value && to.value['startsWith'] && to.value?.startsWith('https'));
 });
 
-const baseClass = 'transition';
+const baseClass = 'transition leading-none';
 
 // Compute button class based on type
 const buttonClass = computed(() => {

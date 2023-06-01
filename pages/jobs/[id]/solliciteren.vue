@@ -97,12 +97,20 @@ const route = useRoute();
 const supabaseClient = useSupabaseClient<Database>();
 const gtag = useGtag();
 
-
 const jobId = route.params.id as string;
 const job = ref<IJob | null>(null);
 const formValue = ref<any>();
 const applicationSuccess = ref<boolean>(false);
 const gifUrl = ref('');
+
+useHead({
+  meta: [{
+    hid: 'description',
+    name: 'description',
+    content: `Solliciteer op deze vacature`
+  }],
+  title: 'Vacature'
+});
 
 async function submitForm(form: any) {
   const resume = formValue.value.resume[0];
@@ -173,12 +181,24 @@ onBeforeRouteLeave((_to, _from, next) => {
 
 });
 
-onMounted(() => {
-  getJob();
-  getGif();
-});
+const getJob = async () => {
+  const { data, error } = await supabaseClient
+    .from('jobs')
+    .select(`*,
+    company:companies (
+      *
+    )
+    )`)
+    .eq('id', jobId)
+    .single();
 
-const getGif = async () => {
+  if (error) {
+    console.error('Error fetching job details:', error);
+  }
+  return data as unknown as IJob;
+};
+
+const getGif = () => {
   const gifs = [
     'https://media.giphy.com/media/Q81NcsY6YxK7jxnr4v/giphy.gif',
     'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjQ4ODVjMTlmNDYxYjgyMTNkYTUxMjUyZjRhNjhkMjRmMjZiMjc4YSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/yoJC2GnSClbPOkV0eA/giphy.gif',
@@ -194,32 +214,27 @@ const getGif = async () => {
 
   // const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=Tix6zmFoFJ1QiGDqXmk1x56WGBcuLpPM&q=success&limit=20`);
   // const data = await response.json();
-  // console.log(data);
   // if (data.data) {
   //   const item = data.data[Math.floor(Math.random() * data.data.length)];
   //   gifUrl.value = item.images.downsized_medium.url;
   // }
 };
 
+useAsyncData('jobs', async () => {
+  job.value = await getJob();
+  useHead({
+    meta: [{
+      hid: 'description',
+      name: 'description',
+      content: `Solliciteer op ${capitalize(job.value?.name) ?? 'Vacature'} bij ${capitalize(job.value?.company.name) ?? 'Bedrijf'}`
+    }],
+    title: `Solliciteer op ${capitalize(job.value?.name) ?? 'Vacature'}`
+  });
+});
 
-const getJob = async () => {
-  const { data, error } = await supabaseClient
-    .from('jobs')
-    .select(`*,
-    company:companies (
-      *
-    )
-    )`)
-    .eq('id', jobId)
-    .single();
-
-  if (error) {
-    console.error('Error fetching job details:', error);
-  } else {
-    job.value = data as unknown as IJob;
-  }
-};
-
+useAsyncData('jobs', async () => {
+  getGif();
+});
 </script>
 
 <style lang="scss">

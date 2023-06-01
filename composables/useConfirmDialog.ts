@@ -40,19 +40,6 @@ export function useConfirmDialog() {
     confirmHandler.value = newConfirmHandler || (() => {});
     cancelHandler.value = newCancelHandler || (() => {});
     isOpen.value = true;
-
-    // console.log("openConfirmDialog");
-    // console.log(newCancelText);
-    // console.log(newConfirmText);
-    // title.value = newTitle;
-    // message.value = newMessage;
-    // cancelText.value = newCancelText;
-    // confirmText.value = newConfirmText;
-    // confirmHandler.value = newConfirmHandler;
-    // cancelHandler.value = newCancelHandler;
-    // isOpen.value = true;
-    // console.log(confirmText.value);
-    // console.log(cancelText.value);
   }
 
   function closeDialog() {

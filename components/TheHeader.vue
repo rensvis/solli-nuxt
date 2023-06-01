@@ -22,7 +22,7 @@
     <div class="flex items-center p-5 header md:text-lg bg-neutral-50">
       <NuxtLink to="/">
         <div class="logo">
-          <img src="/images/solli-s-logo.png" alt="logo" class="h-10" />
+          <img src="/images/solli-s-logo.png" alt="logo" class="h-10" height="40" width="32" />
         </div>
       </NuxtLink>
       <nav class="hidden ml-auto sm:block">
@@ -35,7 +35,8 @@
           </li>
           <li class="">
             <client-only>
-              <a href="https://www.instagram.com/solli.nl/" target="_blank" rel="noreferrer" class="">
+              <a href="https://www.instagram.com/solli.nl/" target="_blank" rel="noreferrer" class=""
+                aria-label="Volg Solli op Instagram">
                 <font-awesome-icon icon="fa-brands fa-instagram" class="text-xl" />
               </a>
             </client-only>
@@ -59,7 +60,8 @@
           </li>
           <li class="">
             <client-only>
-              <a href="https://www.instagram.com/solli.nl/" target="_blank" rel="noreferrer" class="">
+              <a href="https://www.instagram.com/solli.nl/" target="_blank" rel="noreferrer" class=""
+                aria-label="Volg Solli op Instagram">
                 <font-awesome-icon icon="fa-brands fa-instagram" class="text-2xl" />
               </a>
             </client-only>
