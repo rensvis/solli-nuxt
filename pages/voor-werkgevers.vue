@@ -1,5 +1,13 @@
 <script setup>
 
+useHead({
+  meta: [{
+    hid: 'description',
+    name: 'description',
+    content: 'Plaats jouw vacatures gratis op Solli.nl'
+  }],
+  title: 'Voor werkgevers',
+});
 </script>
 
 <template>

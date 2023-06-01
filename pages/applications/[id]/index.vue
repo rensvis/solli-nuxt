@@ -133,6 +133,15 @@ const application = ref<IApplication | null>(null);
 const job = ref<IJob | null>(null);
 const motivationIsOpen = ref<boolean>(false);
 
+useHead({
+  meta: [{
+    hid: 'description',
+    name: 'description',
+    content: `Nieuwe sollicitatie`
+  }],
+  title: 'Nieuwe sollicitatie'
+});
+
 const flashSkeleton = ref(false);
 // setInterval(() => {
 //   flashSkeleton.value = !flashSkeleton.value;
@@ -140,8 +149,6 @@ const flashSkeleton = ref(false);
 
 const formattedWhatsappNumber = computed(() => {
   if (!application.value) return '';
-  console.log(application.value);
-  console.log(`31${application.value.phone_number.replace(/\s/g, '').substring(1)}`);
   return `31${application.value.phone_number.replace(/\s/g, '').substring(1)}`;
 });
 
@@ -199,7 +206,15 @@ const setData = async () => {
 };
 
 useAsyncData(async () => {
-  setData();
+  await setData();
+  useHead({
+    meta: [{
+      hid: 'description',
+      name: 'description',
+      content: `Nieuwe sollicitatie van ${capitalize(application.value?.first_name ?? '')} op ${capitalize(job.value?.name ?? '')}`
+    }],
+    title: 'Nieuwe sollicitatie'
+  });
 });
 
 const applicantInitials = computed(() => {

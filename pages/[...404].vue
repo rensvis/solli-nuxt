@@ -1,6 +1,15 @@
 <script setup lang="ts">
 const gifUrl = ref('');
 
+useHead({
+  meta: [{
+    hid: 'description',
+    name: 'description',
+    content: 'Oh oh, die pagina bestaat niet (meer).'
+  }],
+  title: '404 pagina niet gevonden',
+});
+
 const getGif = async () => {
   const gifs = [
     'https://media.giphy.com/media/gPdC6JQLdJxP9dy3A8/giphy-downsized-large.gif',

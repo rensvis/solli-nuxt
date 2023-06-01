@@ -97,12 +97,20 @@ const route = useRoute();
 const supabaseClient = useSupabaseClient<Database>();
 const gtag = useGtag();
 
-
 const jobId = route.params.id as string;
 const job = ref<IJob | null>(null);
 const formValue = ref<any>();
 const applicationSuccess = ref<boolean>(false);
 const gifUrl = ref('');
+
+useHead({
+  meta: [{
+    hid: 'description',
+    name: 'description',
+    content: `Solliciteer op deze vacature`
+  }],
+  title: 'Vacature'
+});
 
 async function submitForm(form: any) {
   const resume = formValue.value.resume[0];
@@ -206,7 +214,6 @@ const getGif = () => {
 
   // const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=Tix6zmFoFJ1QiGDqXmk1x56WGBcuLpPM&q=success&limit=20`);
   // const data = await response.json();
-  // console.log(data);
   // if (data.data) {
   //   const item = data.data[Math.floor(Math.random() * data.data.length)];
   //   gifUrl.value = item.images.downsized_medium.url;
@@ -215,6 +222,14 @@ const getGif = () => {
 
 useAsyncData('jobs', async () => {
   job.value = await getJob();
+  useHead({
+    meta: [{
+      hid: 'description',
+      name: 'description',
+      content: `Solliciteer op ${capitalize(job.value?.name) ?? 'Vacature'} bij ${capitalize(job.value?.company.name) ?? 'Bedrijf'}`
+    }],
+    title: `Solliciteer op ${capitalize(job.value?.name) ?? 'Vacature'}`
+  });
 });
 
 useAsyncData('jobs', async () => {

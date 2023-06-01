@@ -13,6 +13,7 @@
   
 <script setup lang="ts">
 import { ref, onBeforeUnmount } from 'vue';
+
 let isLoading = ref(true);
 
 const confirmDialog = useConfirmDialog();

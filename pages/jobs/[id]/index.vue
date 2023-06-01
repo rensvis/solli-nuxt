@@ -95,6 +95,15 @@ const sC = ref(null);
 const sCInViewReferenceElement = ref(null);
 const sCInViewReferenceElementInView = useElementVisibility(sCInViewReferenceElement);
 
+useHead({
+  meta: [{
+    hid: 'description',
+    name: 'description',
+    content: `Vacature`
+  }],
+  title: 'Vacature'
+});
+
 const renderedDescription = computed(() => {
   return marked.parse(job.value?.description ?? '');
 });
@@ -148,6 +157,14 @@ const getRelatedJobs = (async () => {
 
 useAsyncData('jobs', async () => {
   job.value = await getJob();
+  useHead({
+    meta: [{
+      hid: 'description',
+      name: 'description',
+      content: `Vacature ${capitalize(job.value?.name) ?? 'Vacature'} bij ${capitalize(job.value?.company.name) ?? 'Bedrijf'}`
+    }],
+    title: capitalize(job.value?.name) ?? 'Vacature'
+  });
 });
 
 useAsyncData('relatedJobs', async () => {
