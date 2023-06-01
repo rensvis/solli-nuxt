@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxt/content",
     "nuxt-gtag",
     "nuxt3-meta-pixel",
+    "@nuxtjs/robots",
   ],
   css: [
     "~/assets/css/main.scss",
