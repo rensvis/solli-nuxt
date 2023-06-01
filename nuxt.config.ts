@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     "@element-plus/nuxt",
     "@nuxt/content",
     "nuxt-gtag",
-    "nuxt3-meta-pixel",
+    // "nuxt3-meta-pixel",
     "@nuxtjs/robots",
   ],
   css: [
@@ -46,11 +46,11 @@ export default defineNuxtConfig({
   gtag: {
     id: "G-Q6J68JPB1E",
   },
-  facebook: {
-    /* module options */
-    track: "PageView",
-    pixelId: "240121868657739",
-    autoPageView: true,
-    disabled: false,
-  },
+  // facebook: {
+  //   /* module options */
+  //   track: "PageView",
+  //   pixelId: "240121868657739",
+  //   autoPageView: true,
+  //   disabled: false,
+  // },
 });
