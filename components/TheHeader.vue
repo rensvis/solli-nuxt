@@ -11,8 +11,9 @@
         </p>
         <div class="basis-12 shrink-0">
           <client-only>
-            <font-awesome-icon icon="fas fa-xmark" size="lg" class="p-1 mt-px ml-6 text-lg cursor-pointer"
-              @click="hideBanner" />
+            <button class="p-1 ml-6 text-lg cursor-pointer" @click="hideBanner">
+              <font-awesome-icon icon="fas fa-xmark" size="lg" aria-label="Sluit banner" />
+            </button>
           </client-only>
         </div>
       </div>

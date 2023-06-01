@@ -7,7 +7,9 @@
         <div class="p-5">
           <div class="flex items-center justify-between pb-3">
             <h3 class="text-xl font-medium">{{ title }}</h3>
-            <font-awesome-icon icon="fas fa-times" size="lg" class="cursor-pointer" @click="cancelAndClose" />
+            <button class="cursor-pointer" @click="cancelAndClose">
+              <font-awesome-icon icon="fas fa-times" size="lg" />
+            </button>
           </div>
           <p class="mb-3">{{ message }}</p>
           <div class="flex justify-end pt-2">
