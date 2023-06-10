@@ -43,6 +43,7 @@
     "nuxt3-meta-pixel": "^1.0.9",
     "tailvue": "^0.1.68",
     "vue-hotjar-next": "^1.4.0",
-    "vue-timeago3": "^2.3.0"
+    "vue-timeago3": "^2.3.0",
+    "vue3-google-map": "^0.15.0"
   }
 }

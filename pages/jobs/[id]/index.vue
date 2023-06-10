@@ -36,16 +36,22 @@
           </div>
         </div>
         <div class="basis-1/3">
-          <Card class="sticky">
-            <div class="flex items-center justify-center">
-              <img :src="job.company.logo_url" :alt="`${job.company.name} logo`" class="object-contain w-40 h-20">
+          <Card class="sticky overflow-hidden" padding="none">
+            <div class="p-4">
+              <div class="flex items-center justify-center">
+                <img :src="job.company.logo_url" :alt="`${job.company.name} logo`" class="object-contain w-40 h-20">
+              </div>
+              <HorizontalRuler></HorizontalRuler>
+              <h4 class="text-lg font-bold">{{ job.company.name }}</h4>
+              <p class="mb-2 text-sm whitespace-pre-wrap text-neutral-500">{{ job.company.description }}</p>
             </div>
-            <HorizontalRuler></HorizontalRuler>
-            <h4 class="text-lg font-bold">{{ job.company.name }}</h4>
-            <p class="mb-2 text-sm whitespace-pre-wrap text-neutral-500">{{ job.company.description }}</p>
+            <GoogleMap v-if="showMap" api-key="AIzaSyAiuQsYUREMTTT2JtuMSrlwVvCyQ19igNo" class="w-full h-64"
+              :disable-default-ui="true" :zoom-control="true" language="nl" region="nl"
+              :center="{ lat: job.company.lat, lng: job.company.lng }" :zoom="13">
+              <Marker :options="{ position: { lat: job.company.lat, lng: job.company.lng } }" />
+            </GoogleMap>
           </Card>
         </div>
-
       </div>
     </div>
 
@@ -80,9 +86,11 @@
 <script setup lang="ts">
 import { IJob } from "~/types/job/Job";
 import { marked } from 'marked';
+import { GoogleMap, Marker } from 'vue3-google-map';
+import { Database } from "~/types/Database";
 
 const route = useRoute();
-const client = useSupabaseClient();
+const supabaseClient = useSupabaseClient<Database>();
 
 const jobId = route.params.id as string;
 const currentRoutePath = route.path;
@@ -105,6 +113,10 @@ useHead({
   title: 'Vacature'
 });
 
+const showMap = computed(() => {
+  return job.value?.company.location !== null && job.value?.company.lat !== null && job.value?.company.lng !== null;
+});
+
 const renderedDescription = computed(() => {
   return marked.parse(job.value?.description ?? '');
 });
@@ -125,12 +137,12 @@ const highlightsMap = computed(() => {
 // }, 1000);
 
 const getJob = async () => {
-  const { data, error } = await client
+  const { data, error } = await supabaseClient
     .from('jobs')
     .select(`*,
-    company:companies (
-      *
-    )
+      company:companies (
+        *
+      )
     )`)
     .eq('id', jobId)
     .single();
@@ -142,7 +154,7 @@ const getJob = async () => {
 };
 
 const getRelatedJobs = (async () => {
-  const { data, error } = await client
+  const { data, error } = await supabaseClient
     .from('jobs')
     .select(`
     *,
@@ -169,7 +181,7 @@ useAsyncData('jobs', async () => {
 });
 
 useAsyncData('relatedJobs', async () => {
-  relatedJobs.value = await getRelatedJobs();
+  relatedJobs.value = await getRelatedJobs() as unknown as IJob[];
 });
 
 </script>

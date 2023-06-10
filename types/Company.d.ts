@@ -2,10 +2,13 @@ export interface ICompany {
   id: string;
   name: string;
   description: string;
-  created_at: Date;
-  logo_url: string;
-  logo_path: string;
+  created_at: string | null;
+  logo_url: string | null;
+  logo_path: string | null;
   location: any;
-  city: string;
-  user_id: string;
+  city: string | null;
+  user_id: string | null;
+  company_mail: string | null;
+  lat: number | null;
+  lng: number | null;
 }
