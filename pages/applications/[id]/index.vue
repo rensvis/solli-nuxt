@@ -22,6 +22,7 @@
                 </div>
               </div>
 
+              <p class="mb-2 text-sm text-neutral-500">{{ application.phone_number }}<br>{{ application.email }}</p>
               <p class="mb-4">{{ application.first_name }} heeft aangegeven te kunnen starten vanaf <span
                   class="font-bold">{{
                     new Date(application.start_date).toLocaleDateString('nl-NL', {
@@ -225,8 +226,6 @@ const applicantInitials = computed(() => {
 const renderedMotivation = computed(() => {
   return marked.parse(application.value?.motivation ?? '');
 });
-
-
 
 
 </script>
