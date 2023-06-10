@@ -45,7 +45,7 @@
               <h4 class="text-lg font-bold">{{ job.company.name }}</h4>
               <p class="mb-2 text-sm whitespace-pre-wrap text-neutral-500">{{ job.company.description }}</p>
             </div>
-            <GoogleMap v-if="showMap" api-key="AIzaSyAiuQsYUREMTTT2JtuMSrlwVvCyQ19igNo" class="w-full h-64"
+            <GoogleMap v-if="showMap" api-key="AIzaSyAiuQsYUREMTTT2JtuMSrlwVvCyQ19igNo" class="w-full h-64 bg-neutral-200"
               :disable-default-ui="true" :zoom-control="true" language="nl" region="nl"
               :center="{ lat: job.company.lat, lng: job.company.lng }" :zoom="13">
               <Marker :options="{ position: { lat: job.company.lat, lng: job.company.lng } }" />
