@@ -46,6 +46,13 @@ export default defineNuxtConfig({
   gtag: {
     id: "G-Q6J68JPB1E",
   },
+  // this is a workaround for an issue with in production (see link)
+  // https://github.com/googlemaps/js-api-loader/issues/692
+  vite: {
+    ssr: {
+      noExternal: ["@googlemaps/js-api-loader"],
+    },
+  },
   // facebook: {
   //   /* module options */
   //   track: "PageView",
