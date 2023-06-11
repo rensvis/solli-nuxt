@@ -44,7 +44,7 @@ const isExternalLink = computed(() => {
   return (to.value && to.value['startsWith'] && to.value?.startsWith('https'));
 });
 
-const baseClass = 'transition leading-none';
+const baseClass = 'transition-all leading-none';
 
 // Compute button class based on type
 const buttonClass = computed(() => {
@@ -55,6 +55,8 @@ const buttonClass = computed(() => {
       return 'rounded text-keppel-500 hover:bg-keppel-100';
     case 'danger':
       return 'rounded bg-red-400 text-white';
+    case 'textbutton-danger':
+      return 'rounded text-red-500 hover:bg-red-100';
     default:
       return 'rounded bg-keppel-500 text-white hover:bg-keppel-600';
   }

@@ -7,12 +7,12 @@
         <div class="flex items-center gap-4">
           <div
             class="flex items-center justify-center flex-shrink w-16 h-16 p-2 bg-white rounded-lg sm:w-20 sm:h-20 aspect-square">
-            <img :src="job.company.logo_url" :alt="`${job.company.name} logo`" height="48px" width="48px"
+            <img :src="companyLogo" :alt="`${companyName} logo`" height="48px" width="48px"
               class="object-contain w-full h-full text-xs">
           </div>
           <div class="leading-none" style="word-break: break-word">
             <h3 class="mb-2 text-xl font-bold">{{ job.name }}</h3>
-            <p class="text-neutral-500">{{ job.company.name }}</p>
+            <p class="text-neutral-500">{{ companyName }}</p>
           </div>
         </div>
         <p class="mb-2 text-neutral-500">{{ summaryString }}</p>
@@ -35,7 +35,7 @@
         <div class="flex items-center gap-4 mb-4">
           <div
             class="flex items-center justify-center flex-shrink w-16 h-16 p-2 bg-white rounded-lg sm:w-20 sm:h-20 aspect-square">
-            <img :src="job.company.logo_url" :alt="`${job.company.name} logo`" height="64px" width="64px"
+            <img :src="companyLogo" :alt="`${companyName} logo`" height="64px" width="64px"
               class="object-contain w-full h-full text-xs">
           </div>
           <div class="leading-none ">
@@ -45,7 +45,7 @@
                 <timeago :datetime="new Date(job.created_at)" :locale="nl" />
               </span>
             </div>
-            <p class="text-neutral-500">{{ job.company.name }}</p>
+            <p class="text-neutral-500">{{ companyName }}</p>
           </div>
         </div>
         <p class="mb-2 text-neutral-500">{{ summaryString }}</p>
@@ -80,7 +80,9 @@ const props = defineProps({
   }
 });
 
-
+const companyName = computed(() => props.job.company.name ?? props.job.company_name);
+const companyLogo = computed(() => props.job.company.logo_url ?? props.job.company_logo_url);
+const companyCity = computed(() => props.job.company.city ?? props.job.company_city);
 
 /**
  * 01-06-2023
@@ -109,7 +111,11 @@ const jobDescriptionLong = computed(() => {
 
 const summaryString = computed(() => {
   const hours_min = props.job.hours_per_week_min, hours_max = props.job.hours_per_week_max;
-  return [props.job.company.city, `${(hours_min === hours_max || !hours_max) ? hours_min : [hours_min, hours_max].join('-')} uur per week`].filter(val => val).join(" • ");
+  return [
+    companyCity.value,
+    `${(hours_min === hours_max || !hours_max) ? hours_min : [hours_min, hours_max].join('-')} uur per week`,
+    (props.job.distance_meters) ? `${Math.floor(props.job.distance_meters / 1000)} km` : null
+  ].filter(val => val).join(" • ");
   // 
 });
 

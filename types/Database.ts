@@ -242,6 +242,19 @@ export interface Database {
           benefits: string[];
         }[];
       };
+      nearby_jobs: {
+        Args: {
+          input_limit: number;
+          input_offset: number;
+          input_sort: string;
+          input_sort_direction: string;
+          input_search_text: string;
+          input_lat?: number;
+          input_lng?: number;
+          input_max_distance_meters?: number;
+        };
+        Returns: Record<string, unknown>[];
+      };
     };
     Enums: {
       [_ in never]: never;

@@ -1,6 +1,7 @@
 
 <template>
   <div :class="{ 'no-transition': isLoading }" class="text-neutral-700">
+
     <NuxtLoadingIndicator></NuxtLoadingIndicator>
     <TheHeader></TheHeader>
     <PageWrapper>
